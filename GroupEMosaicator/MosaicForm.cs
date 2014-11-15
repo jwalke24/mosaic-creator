@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace GroupEMosaicator
 {
-    public partial class Form1 : Form
+    public partial class MosaicForm : Form
     {
-        public Form1()
+        public MosaicForm()
         {
             InitializeComponent();
         }
