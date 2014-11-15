@@ -1,4 +1,6 @@
-﻿namespace GroupEMosaicator
+﻿using System.Security.AccessControl;
+
+namespace GroupEMosaicator
 {
     partial class MosaicForm
     {
@@ -43,6 +45,7 @@
             this.originalTabPage = new System.Windows.Forms.TabPage();
             this.mosaicTabPage = new System.Windows.Forms.TabPage();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.saveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
@@ -68,9 +71,10 @@
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openMenuItem,
             this.saveMenuItem,
+            this.saveAsMenuItem,
             this.exitMenuItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(37, 20);
+            this.fileMenu.Size = new System.Drawing.Size(94, 20);
             this.fileMenu.Text = "File";
             // 
             // openMenuItem
@@ -85,12 +89,14 @@
             this.saveMenuItem.Name = "saveMenuItem";
             this.saveMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveMenuItem.Text = "Save";
+            this.saveMenuItem.Click += new System.EventHandler(this.saveMenuItem_Click);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
             this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitMenuItem.Text = "Exit";
+            this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
             // editMenu
             // 
@@ -177,6 +183,13 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // saveAsMenuItem
+            // 
+            this.saveAsMenuItem.Name = "saveAsMenuItem";
+            this.saveAsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveAsMenuItem.Text = "Save As";
+            this.saveAsMenuItem.Click += new System.EventHandler(this.saveAsMenuItem_Click);
+            // 
             // MosaicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -216,6 +229,7 @@
         private System.Windows.Forms.TabPage originalTabPage;
         private System.Windows.Forms.TabPage mosaicTabPage;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem saveAsMenuItem;
     }
 }
 
