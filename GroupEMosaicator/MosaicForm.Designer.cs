@@ -34,10 +34,10 @@
             this.saveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.createMosaicMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createMosaicMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.originalImageBox = new System.Windows.Forms.PictureBox();
             this.tabPane = new System.Windows.Forms.TabControl();
             this.originalTabPage = new System.Windows.Forms.TabPage();
@@ -78,6 +78,7 @@
             this.openMenuItem.Name = "openMenuItem";
             this.openMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openMenuItem.Text = "Open";
+            this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
             // 
             // saveMenuItem
             // 
@@ -99,6 +100,12 @@
             this.editMenu.Size = new System.Drawing.Size(39, 20);
             this.editMenu.Text = "Edit";
             // 
+            // createMosaicMenuItem
+            // 
+            this.createMosaicMenuItem.Name = "createMosaicMenuItem";
+            this.createMosaicMenuItem.Size = new System.Drawing.Size(158, 22);
+            this.createMosaicMenuItem.Text = "Create Mosaic...";
+            // 
             // helpMenu
             // 
             this.helpMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -111,26 +118,21 @@
             // helpMenuItem
             // 
             this.helpMenuItem.Name = "helpMenuItem";
-            this.helpMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helpMenuItem.Size = new System.Drawing.Size(107, 22);
             this.helpMenuItem.Text = "Help";
             // 
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
-            this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutMenuItem.Text = "About";
-            // 
-            // createMosaicMenuItem
-            // 
-            this.createMosaicMenuItem.Name = "createMosaicMenuItem";
-            this.createMosaicMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.createMosaicMenuItem.Text = "Create Mosaic...";
             // 
             // originalImageBox
             // 
             this.originalImageBox.Location = new System.Drawing.Point(0, 0);
             this.originalImageBox.Name = "originalImageBox";
             this.originalImageBox.Size = new System.Drawing.Size(659, 291);
+            this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.originalImageBox.TabIndex = 1;
             this.originalImageBox.TabStop = false;
             // 
@@ -171,6 +173,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(659, 291);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
