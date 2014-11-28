@@ -1,14 +1,10 @@
 ﻿using System.Drawing;
 
-namespace GroupEMosaicator.View
+namespace GroupEMosaicator.View.Overlays
 {
     internal class TriangleOverlay : ShapeOverlay
     {
 
-        public TriangleOverlay() : base()
-        {
-            
-        }
 
         public override Image CreateGrid(Image image, int blocks)
         {

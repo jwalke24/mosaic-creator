@@ -1,13 +1,10 @@
 ﻿using System.Drawing;
 
-namespace GroupEMosaicator.View
+namespace GroupEMosaicator.View.Overlays
 {
     public class SquareOverlay : ShapeOverlay
     {
-        public SquareOverlay() : base()
-        {
-            
-        }
+
 
         public override Image CreateGrid(Image image, int blocks)
         {

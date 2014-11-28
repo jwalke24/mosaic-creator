@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IO\FileIO.cs" />
-    <Compile Include="Model\BlockMosaicCreator.cs" />
+    <Compile Include="Model\PixelFactory.cs" />
     <Compile Include="Model\MosaicCreator.cs" />
     <Compile Include="View\Overlays\SquareOverlay.cs" />
     <Compile Include="View\Overlays\TriangleOverlay.cs" />
