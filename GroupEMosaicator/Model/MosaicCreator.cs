@@ -4,7 +4,6 @@ namespace GroupEMosaicator.Model
 {
     internal class MosaicCreator
     {
-        //private List<Image> images;
 
         public Image CreateBlockMosaic(int blockSize, Bitmap image)
         {
