@@ -1,6 +1,6 @@
 ﻿using System.Security.AccessControl;
 
-namespace GroupEMosaicator
+namespace GroupEMosaicator.View
 {
     partial class MosaicForm
     {
@@ -37,6 +37,8 @@ namespace GroupEMosaicator
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.createMosaicMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.solidBlockMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,14 +46,18 @@ namespace GroupEMosaicator
             this.tabPane = new System.Windows.Forms.TabControl();
             this.originalTabPage = new System.Windows.Forms.TabPage();
             this.mosaicTabPage = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.saveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mosaicImageBox = new System.Windows.Forms.PictureBox();
+            this.numberBlocksTextBox = new System.Windows.Forms.TextBox();
+            this.mosaicButton = new System.Windows.Forms.Button();
+            this.boxesLable = new System.Windows.Forms.Label();
+            this.addGridButton = new System.Windows.Forms.Button();
+            this.removeGridButton = new System.Windows.Forms.Button();
             this.menuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
             this.originalTabPage.SuspendLayout();
             this.mosaicTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuBar
@@ -62,7 +68,7 @@ namespace GroupEMosaicator
             this.helpMenu});
             this.menuBar.Location = new System.Drawing.Point(0, 0);
             this.menuBar.Name = "menuBar";
-            this.menuBar.Size = new System.Drawing.Size(667, 24);
+            this.menuBar.Size = new System.Drawing.Size(674, 24);
             this.menuBar.TabIndex = 0;
             this.menuBar.Text = "menuStrip1";
             // 
@@ -71,30 +77,29 @@ namespace GroupEMosaicator
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openMenuItem,
             this.saveMenuItem,
-            this.saveAsMenuItem,
             this.exitMenuItem});
             this.fileMenu.Name = "fileMenu";
-            this.fileMenu.Size = new System.Drawing.Size(94, 20);
+            this.fileMenu.Size = new System.Drawing.Size(37, 20);
             this.fileMenu.Text = "File";
             // 
             // openMenuItem
             // 
             this.openMenuItem.Name = "openMenuItem";
-            this.openMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openMenuItem.Text = "Open";
             this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
             // 
             // saveMenuItem
             // 
             this.saveMenuItem.Name = "saveMenuItem";
-            this.saveMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveMenuItem.Text = "Save";
             this.saveMenuItem.Click += new System.EventHandler(this.saveMenuItem_Click);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitMenuItem.Text = "Exit";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
@@ -108,9 +113,24 @@ namespace GroupEMosaicator
             // 
             // createMosaicMenuItem
             // 
+            this.createMosaicMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.solidBlockMosaicToolStripMenuItem,
+            this.pictureMosaicToolStripMenuItem});
             this.createMosaicMenuItem.Name = "createMosaicMenuItem";
             this.createMosaicMenuItem.Size = new System.Drawing.Size(158, 22);
             this.createMosaicMenuItem.Text = "Create Mosaic...";
+            // 
+            // solidBlockMosaicToolStripMenuItem
+            // 
+            this.solidBlockMosaicToolStripMenuItem.Name = "solidBlockMosaicToolStripMenuItem";
+            this.solidBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.solidBlockMosaicToolStripMenuItem.Text = "Solid Block Mosaic";
+            // 
+            // pictureMosaicToolStripMenuItem
+            // 
+            this.pictureMosaicToolStripMenuItem.Name = "pictureMosaicToolStripMenuItem";
+            this.pictureMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pictureMosaicToolStripMenuItem.Text = "Picture Mosaic";
             // 
             // helpMenu
             // 
@@ -137,7 +157,7 @@ namespace GroupEMosaicator
             // 
             this.originalImageBox.Location = new System.Drawing.Point(0, 0);
             this.originalImageBox.Name = "originalImageBox";
-            this.originalImageBox.Size = new System.Drawing.Size(659, 291);
+            this.originalImageBox.Size = new System.Drawing.Size(666, 340);
             this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.originalImageBox.TabIndex = 1;
             this.originalImageBox.TabStop = false;
@@ -146,10 +166,10 @@ namespace GroupEMosaicator
             // 
             this.tabPane.Controls.Add(this.originalTabPage);
             this.tabPane.Controls.Add(this.mosaicTabPage);
-            this.tabPane.Location = new System.Drawing.Point(0, 27);
+            this.tabPane.Location = new System.Drawing.Point(0, 53);
             this.tabPane.Name = "tabPane";
             this.tabPane.SelectedIndex = 0;
-            this.tabPane.Size = new System.Drawing.Size(667, 317);
+            this.tabPane.Size = new System.Drawing.Size(674, 366);
             this.tabPane.TabIndex = 2;
             // 
             // originalTabPage
@@ -158,43 +178,87 @@ namespace GroupEMosaicator
             this.originalTabPage.Location = new System.Drawing.Point(4, 22);
             this.originalTabPage.Name = "originalTabPage";
             this.originalTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.originalTabPage.Size = new System.Drawing.Size(659, 291);
+            this.originalTabPage.Size = new System.Drawing.Size(666, 340);
             this.originalTabPage.TabIndex = 0;
             this.originalTabPage.Text = "Original Image";
             this.originalTabPage.UseVisualStyleBackColor = true;
             // 
             // mosaicTabPage
             // 
-            this.mosaicTabPage.Controls.Add(this.pictureBox1);
+            this.mosaicTabPage.Controls.Add(this.mosaicImageBox);
             this.mosaicTabPage.Location = new System.Drawing.Point(4, 22);
             this.mosaicTabPage.Name = "mosaicTabPage";
             this.mosaicTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.mosaicTabPage.Size = new System.Drawing.Size(659, 291);
+            this.mosaicTabPage.Size = new System.Drawing.Size(666, 340);
             this.mosaicTabPage.TabIndex = 1;
             this.mosaicTabPage.Text = "Mosaic";
             this.mosaicTabPage.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // mosaicImageBox
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(659, 291);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.mosaicImageBox.Location = new System.Drawing.Point(0, 0);
+            this.mosaicImageBox.Name = "mosaicImageBox";
+            this.mosaicImageBox.Size = new System.Drawing.Size(666, 341);
+            this.mosaicImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.mosaicImageBox.TabIndex = 0;
+            this.mosaicImageBox.TabStop = false;
             // 
-            // saveAsMenuItem
+            // numberBlocksTextBox
             // 
-            this.saveAsMenuItem.Name = "saveAsMenuItem";
-            this.saveAsMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveAsMenuItem.Text = "Save As";
-            this.saveAsMenuItem.Click += new System.EventHandler(this.saveAsMenuItem_Click);
+            this.numberBlocksTextBox.Location = new System.Drawing.Point(68, 27);
+            this.numberBlocksTextBox.Name = "numberBlocksTextBox";
+            this.numberBlocksTextBox.Size = new System.Drawing.Size(53, 20);
+            this.numberBlocksTextBox.TabIndex = 3;
+            // 
+            // mosaicButton
+            // 
+            this.mosaicButton.Location = new System.Drawing.Point(127, 25);
+            this.mosaicButton.Name = "mosaicButton";
+            this.mosaicButton.Size = new System.Drawing.Size(75, 23);
+            this.mosaicButton.TabIndex = 4;
+            this.mosaicButton.Text = "Create";
+            this.mosaicButton.UseVisualStyleBackColor = true;
+            this.mosaicButton.Click += new System.EventHandler(this.mosaicButton_Click);
+            // 
+            // boxesLable
+            // 
+            this.boxesLable.AutoSize = true;
+            this.boxesLable.Location = new System.Drawing.Point(27, 30);
+            this.boxesLable.Name = "boxesLable";
+            this.boxesLable.Size = new System.Drawing.Size(36, 13);
+            this.boxesLable.TabIndex = 5;
+            this.boxesLable.Text = "Boxes";
+            // 
+            // addGridButton
+            // 
+            this.addGridButton.Location = new System.Drawing.Point(243, 25);
+            this.addGridButton.Name = "addGridButton";
+            this.addGridButton.Size = new System.Drawing.Size(75, 23);
+            this.addGridButton.TabIndex = 6;
+            this.addGridButton.Text = "Grid";
+            this.addGridButton.UseVisualStyleBackColor = true;
+            this.addGridButton.Click += new System.EventHandler(this.gridButton_CLick);
+            // 
+            // removeGridButton
+            // 
+            this.removeGridButton.Location = new System.Drawing.Point(324, 25);
+            this.removeGridButton.Name = "removeGridButton";
+            this.removeGridButton.Size = new System.Drawing.Size(84, 23);
+            this.removeGridButton.TabIndex = 7;
+            this.removeGridButton.Text = "Remove Grid";
+            this.removeGridButton.UseVisualStyleBackColor = true;
+            this.removeGridButton.Click += new System.EventHandler(this.removeGridButton_Click);
             // 
             // MosaicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(667, 346);
+            this.ClientSize = new System.Drawing.Size(674, 420);
+            this.Controls.Add(this.removeGridButton);
+            this.Controls.Add(this.addGridButton);
+            this.Controls.Add(this.boxesLable);
+            this.Controls.Add(this.mosaicButton);
+            this.Controls.Add(this.numberBlocksTextBox);
             this.Controls.Add(this.tabPane);
             this.Controls.Add(this.menuBar);
             this.MainMenuStrip = this.menuBar;
@@ -206,7 +270,7 @@ namespace GroupEMosaicator
             this.tabPane.ResumeLayout(false);
             this.originalTabPage.ResumeLayout(false);
             this.mosaicTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -217,7 +281,6 @@ namespace GroupEMosaicator
         private System.Windows.Forms.MenuStrip menuBar;
         private System.Windows.Forms.ToolStripMenuItem fileMenu;
         private System.Windows.Forms.ToolStripMenuItem openMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editMenu;
         private System.Windows.Forms.ToolStripMenuItem helpMenu;
@@ -228,8 +291,15 @@ namespace GroupEMosaicator
         private System.Windows.Forms.TabControl tabPane;
         private System.Windows.Forms.TabPage originalTabPage;
         private System.Windows.Forms.TabPage mosaicTabPage;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ToolStripMenuItem saveAsMenuItem;
+        private System.Windows.Forms.PictureBox mosaicImageBox;
+        private System.Windows.Forms.ToolStripMenuItem saveMenuItem;
+        private System.Windows.Forms.TextBox numberBlocksTextBox;
+        private System.Windows.Forms.Button mosaicButton;
+        private System.Windows.Forms.ToolStripMenuItem solidBlockMosaicToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pictureMosaicToolStripMenuItem;
+        private System.Windows.Forms.Label boxesLable;
+        private System.Windows.Forms.Button addGridButton;
+        private System.Windows.Forms.Button removeGridButton;
     }
 }
 
