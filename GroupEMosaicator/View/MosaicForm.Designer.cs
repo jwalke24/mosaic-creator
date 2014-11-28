@@ -30,6 +30,7 @@ namespace GroupEMosaicator.View
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MosaicForm));
             this.menuBar = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,17 +48,20 @@ namespace GroupEMosaicator.View
             this.originalTabPage = new System.Windows.Forms.TabPage();
             this.mosaicTabPage = new System.Windows.Forms.TabPage();
             this.mosaicImageBox = new System.Windows.Forms.PictureBox();
-            this.numberBlocksTextBox = new System.Windows.Forms.TextBox();
-            this.mosaicButton = new System.Windows.Forms.Button();
-            this.boxesLable = new System.Windows.Forms.Label();
-            this.addGridButton = new System.Windows.Forms.Button();
-            this.removeGridButton = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripGridButton = new System.Windows.Forms.ToolStripSplitButton();
+            this.addGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.squareGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.traingleGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.blockSizeTextBox = new System.Windows.Forms.ToolStripTextBox();
             this.menuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
             this.originalTabPage.SuspendLayout();
             this.mosaicTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuBar
@@ -68,7 +72,7 @@ namespace GroupEMosaicator.View
             this.helpMenu});
             this.menuBar.Location = new System.Drawing.Point(0, 0);
             this.menuBar.Name = "menuBar";
-            this.menuBar.Size = new System.Drawing.Size(674, 24);
+            this.menuBar.Size = new System.Drawing.Size(777, 24);
             this.menuBar.TabIndex = 0;
             this.menuBar.Text = "menuStrip1";
             // 
@@ -157,7 +161,7 @@ namespace GroupEMosaicator.View
             // 
             this.originalImageBox.Location = new System.Drawing.Point(0, 0);
             this.originalImageBox.Name = "originalImageBox";
-            this.originalImageBox.Size = new System.Drawing.Size(666, 340);
+            this.originalImageBox.Size = new System.Drawing.Size(775, 488);
             this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.originalImageBox.TabIndex = 1;
             this.originalImageBox.TabStop = false;
@@ -166,10 +170,10 @@ namespace GroupEMosaicator.View
             // 
             this.tabPane.Controls.Add(this.originalTabPage);
             this.tabPane.Controls.Add(this.mosaicTabPage);
-            this.tabPane.Location = new System.Drawing.Point(0, 53);
+            this.tabPane.Location = new System.Drawing.Point(0, 52);
             this.tabPane.Name = "tabPane";
             this.tabPane.SelectedIndex = 0;
-            this.tabPane.Size = new System.Drawing.Size(674, 366);
+            this.tabPane.Size = new System.Drawing.Size(779, 514);
             this.tabPane.TabIndex = 2;
             // 
             // originalTabPage
@@ -178,7 +182,7 @@ namespace GroupEMosaicator.View
             this.originalTabPage.Location = new System.Drawing.Point(4, 22);
             this.originalTabPage.Name = "originalTabPage";
             this.originalTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.originalTabPage.Size = new System.Drawing.Size(666, 340);
+            this.originalTabPage.Size = new System.Drawing.Size(771, 488);
             this.originalTabPage.TabIndex = 0;
             this.originalTabPage.Text = "Original Image";
             this.originalTabPage.UseVisualStyleBackColor = true;
@@ -189,7 +193,7 @@ namespace GroupEMosaicator.View
             this.mosaicTabPage.Location = new System.Drawing.Point(4, 22);
             this.mosaicTabPage.Name = "mosaicTabPage";
             this.mosaicTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.mosaicTabPage.Size = new System.Drawing.Size(666, 340);
+            this.mosaicTabPage.Size = new System.Drawing.Size(771, 488);
             this.mosaicTabPage.TabIndex = 1;
             this.mosaicTabPage.Text = "Mosaic";
             this.mosaicTabPage.UseVisualStyleBackColor = true;
@@ -198,67 +202,77 @@ namespace GroupEMosaicator.View
             // 
             this.mosaicImageBox.Location = new System.Drawing.Point(0, 0);
             this.mosaicImageBox.Name = "mosaicImageBox";
-            this.mosaicImageBox.Size = new System.Drawing.Size(666, 341);
+            this.mosaicImageBox.Size = new System.Drawing.Size(771, 488);
             this.mosaicImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.mosaicImageBox.TabIndex = 0;
             this.mosaicImageBox.TabStop = false;
             // 
-            // numberBlocksTextBox
+            // toolStrip1
             // 
-            this.numberBlocksTextBox.Location = new System.Drawing.Point(68, 27);
-            this.numberBlocksTextBox.Name = "numberBlocksTextBox";
-            this.numberBlocksTextBox.Size = new System.Drawing.Size(53, 20);
-            this.numberBlocksTextBox.TabIndex = 3;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripGridButton,
+            this.blockSizeTextBox});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(777, 25);
+            this.toolStrip1.TabIndex = 8;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // mosaicButton
+            // toolStripGridButton
             // 
-            this.mosaicButton.Location = new System.Drawing.Point(127, 25);
-            this.mosaicButton.Name = "mosaicButton";
-            this.mosaicButton.Size = new System.Drawing.Size(75, 23);
-            this.mosaicButton.TabIndex = 4;
-            this.mosaicButton.Text = "Create";
-            this.mosaicButton.UseVisualStyleBackColor = true;
-            this.mosaicButton.Click += new System.EventHandler(this.mosaicButton_Click);
+            this.toolStripGridButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripGridButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addGridToolStripMenuItem,
+            this.removeGridToolStripMenuItem});
+            this.toolStripGridButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripGridButton.Image")));
+            this.toolStripGridButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripGridButton.Name = "toolStripGridButton";
+            this.toolStripGridButton.Size = new System.Drawing.Size(45, 22);
+            this.toolStripGridButton.Text = "Grid";
             // 
-            // boxesLable
+            // addGridToolStripMenuItem
             // 
-            this.boxesLable.AutoSize = true;
-            this.boxesLable.Location = new System.Drawing.Point(27, 30);
-            this.boxesLable.Name = "boxesLable";
-            this.boxesLable.Size = new System.Drawing.Size(36, 13);
-            this.boxesLable.TabIndex = 5;
-            this.boxesLable.Text = "Boxes";
+            this.addGridToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.squareGridToolStripMenuItem,
+            this.traingleGridToolStripMenuItem});
+            this.addGridToolStripMenuItem.Name = "addGridToolStripMenuItem";
+            this.addGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addGridToolStripMenuItem.Text = "Add Grid";
             // 
-            // addGridButton
+            // squareGridToolStripMenuItem
             // 
-            this.addGridButton.Location = new System.Drawing.Point(243, 25);
-            this.addGridButton.Name = "addGridButton";
-            this.addGridButton.Size = new System.Drawing.Size(75, 23);
-            this.addGridButton.TabIndex = 6;
-            this.addGridButton.Text = "Grid";
-            this.addGridButton.UseVisualStyleBackColor = true;
-            this.addGridButton.Click += new System.EventHandler(this.gridButton_CLick);
+            this.squareGridToolStripMenuItem.Name = "squareGridToolStripMenuItem";
+            this.squareGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.squareGridToolStripMenuItem.Text = "Square Grid";
+            this.squareGridToolStripMenuItem.Click += new System.EventHandler(this.squareGridToolStripMenuItem_Click);
             // 
-            // removeGridButton
+            // traingleGridToolStripMenuItem
             // 
-            this.removeGridButton.Location = new System.Drawing.Point(324, 25);
-            this.removeGridButton.Name = "removeGridButton";
-            this.removeGridButton.Size = new System.Drawing.Size(84, 23);
-            this.removeGridButton.TabIndex = 7;
-            this.removeGridButton.Text = "Remove Grid";
-            this.removeGridButton.UseVisualStyleBackColor = true;
-            this.removeGridButton.Click += new System.EventHandler(this.removeGridButton_Click);
+            this.traingleGridToolStripMenuItem.Name = "traingleGridToolStripMenuItem";
+            this.traingleGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.traingleGridToolStripMenuItem.Text = "Traingle Grid";
+            this.traingleGridToolStripMenuItem.Click += new System.EventHandler(this.traingleGridToolStripMenuItem_Click);
+            // 
+            // removeGridToolStripMenuItem
+            // 
+            this.removeGridToolStripMenuItem.Name = "removeGridToolStripMenuItem";
+            this.removeGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removeGridToolStripMenuItem.Text = "Remove Grid";
+            this.removeGridToolStripMenuItem.Click += new System.EventHandler(this.removeGridToolStripMenuItem_Click);
+            // 
+            // blockSizeTextBox
+            // 
+            this.blockSizeTextBox.Name = "blockSizeTextBox";
+            this.blockSizeTextBox.Size = new System.Drawing.Size(100, 25);
+            this.blockSizeTextBox.Text = "Enter Block Size";
+            this.blockSizeTextBox.Click += new System.EventHandler(this.blockSizeTextBox_Click);
             // 
             // MosaicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(674, 420);
-            this.Controls.Add(this.removeGridButton);
-            this.Controls.Add(this.addGridButton);
-            this.Controls.Add(this.boxesLable);
-            this.Controls.Add(this.mosaicButton);
-            this.Controls.Add(this.numberBlocksTextBox);
+            this.ClientSize = new System.Drawing.Size(777, 565);
+            this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.tabPane);
             this.Controls.Add(this.menuBar);
             this.MainMenuStrip = this.menuBar;
@@ -271,6 +285,8 @@ namespace GroupEMosaicator.View
             this.originalTabPage.ResumeLayout(false);
             this.mosaicTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,13 +309,15 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.TabPage mosaicTabPage;
         private System.Windows.Forms.PictureBox mosaicImageBox;
         private System.Windows.Forms.ToolStripMenuItem saveMenuItem;
-        private System.Windows.Forms.TextBox numberBlocksTextBox;
-        private System.Windows.Forms.Button mosaicButton;
         private System.Windows.Forms.ToolStripMenuItem solidBlockMosaicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pictureMosaicToolStripMenuItem;
-        private System.Windows.Forms.Label boxesLable;
-        private System.Windows.Forms.Button addGridButton;
-        private System.Windows.Forms.Button removeGridButton;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripSplitButton toolStripGridButton;
+        private System.Windows.Forms.ToolStripMenuItem addGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem squareGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem traingleGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeGridToolStripMenuItem;
+        private System.Windows.Forms.ToolStripTextBox blockSizeTextBox;
     }
 }
 
