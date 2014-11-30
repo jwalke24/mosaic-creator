@@ -42,7 +42,7 @@ namespace GroupEMosaicator.Model
                 }
             }
 
-            var newColor = getNewColor(area, redSum, greenSum, blueSum);
+            Color newColor = getNewColor(area, redSum, greenSum, blueSum);
 
             return newColor;
         }

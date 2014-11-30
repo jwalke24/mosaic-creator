@@ -47,6 +47,7 @@ namespace GroupEMosaicator.View
             if (this.originalImage != null)
             {
                 this.originalImageBox.Image = (Image) this.originalImage.Clone();
+                this.squareBlocksToolStripMenuItem.Enabled = true;
             }
         }
 
@@ -120,11 +121,6 @@ namespace GroupEMosaicator.View
             this.saveMenuItem_Click(sender, e);
         }
 
-        private void createBlockMosaicToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-    
-        }
-
         private void createPictureMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
         }
@@ -132,7 +128,14 @@ namespace GroupEMosaicator.View
         private void squareBlocksToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.mosaicImageBox.Image = this.blockManager.CreateSquareBlockMosaic(this.BlockSizeTextBox,
-                (Bitmap)this.originalImage);
+                (Bitmap) this.originalImage);
+            this.squareBlocksToolStripMenuItem.Enabled = false;
+        }
+
+        private void triangleBlocksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.mosaicImageBox.Image = this.blockManager.CreateTriangleBlockMosaic(this.BlockSizeTextBox,
+                (Bitmap) this.originalImage);
         }
     }
 }

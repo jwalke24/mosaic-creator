@@ -52,16 +52,16 @@ namespace GroupEMosaicator.IO
                     switch (saveDialog.FilterIndex)
                     {
                         case 1:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Jpeg);
+                            this.pictureBox.Image.Save(imageStream, ImageFormat.Jpeg);
                             break;
                         case 2:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Gif);
+                            this.pictureBox.Image.Save(imageStream, ImageFormat.Gif);
                             break;
                         case 3:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Bmp);
+                            this.pictureBox.Image.Save(imageStream, ImageFormat.Bmp);
                             break;
                         case 4:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Png);
+                            this.pictureBox.Image.Save(imageStream, ImageFormat.Png);
                             break;
                     }
                     imageStream.Close();
