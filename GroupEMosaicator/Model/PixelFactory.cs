@@ -16,28 +16,38 @@ namespace GroupEMosaicator.Model
                 throw new ArgumentNullException("area cannot be null");
             }
 
+            if (area.X + area.Width >= bitmap.Width)
+            {
+                area.Width = bitmap.Width - area.X - 1;
+            }
+
+            if (area.Y + area.Height >= bitmap.Height)
+            {
+                area.Height = bitmap.Height - area.Y - 1;
+            }
 
             int redSum = 0;
             int greenSum = 0;
             int blueSum = 0;
+            Color color = Color.Empty;
 
-
-            for (int y = area.Y; y < area.Height; y++)
+            for (int i = 0; i < area.Width; i++)
             {
-                for (int x = area.X; x < area.Width; x++)
+                for (int j = 0; j < area.Height; j++)
                 {
-                    Color color = bitmap.GetPixel(area.X + x, area.Y + y);
-                    int colorCode = color.ToArgb();
+                    color = bitmap.GetPixel(area.X + i, area.Y + j);
                     redSum += color.R;
                     greenSum += color.G;
                     blueSum += color.B;
                 }
             }
-            int redValue = (redSum/(area.Width*area.Height));
-            int greenValue = (greenSum/(area.Width*area.Height));
-            int blueValue = (blueSum/(area.Width*area.Height));
+            int redValue = (redSum / (area.Width * area.Height + 1));
+            int greenValue = (greenSum / (area.Width * area.Height + 1));
+            int blueValue = (blueSum / (area.Width * area.Height + 1));
 
-            return Color.FromArgb(255, redValue, greenValue, blueValue);
+            Color newColor = Color.FromArgb(255, redValue, greenValue, blueValue);
+
+            return newColor;
         }
     }
 }

@@ -6,7 +6,7 @@ namespace GroupEMosaicator.View.Overlays
     {
 
 
-        public abstract Image CreateGrid(Image image, int blocks);
+        public abstract Image CreateGrid(Image image, int blockSize);
 
     }
 }

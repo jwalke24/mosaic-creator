@@ -6,10 +6,11 @@ namespace GroupEMosaicator.View.Overlays
     {
 
 
-        public override Image CreateGrid(Image image, int blocks)
+        public override Image CreateGrid(Image image, int blockSize)
         {
-            //throw new System.NotImplementedException();
-            return null;
+
+
+            return image;
         }
     }
 }

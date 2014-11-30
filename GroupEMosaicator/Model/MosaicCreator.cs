@@ -7,24 +7,27 @@ namespace GroupEMosaicator.Model
 
         public Image CreateBlockMosaic(int blockSize, Bitmap image)
         {
+            if (blockSize <= 0)
+            {
+                return null;
+            }
             // Start with the current image.
-            Bitmap newBitmap = new Bitmap(image);
+            var newBitmap = new Bitmap(image);
             using (Graphics graphics = Graphics.FromImage(newBitmap))
             {
                 
-
                 // Pixelate the selected area.
-                for (int x = 0; x < image.Width; x += blockSize)
+                for (int column = 0; column < image.Height; column += blockSize)
                 {
-                    for (int y = 0; y < image.Height; y += blockSize)
+                    for (int row = 0; row < image.Width; row += blockSize)
                     {
                         // Get the average color in the area.
-                        Color averageColor = PixelFactory.GetAverageColor(new Rectangle(x, y, blockSize, blockSize), image);
+                        Color averageColor = PixelFactory.GetAverageColor(new Rectangle(row, column, blockSize, blockSize), image);
 
                         // Fill the area.
-                        using (SolidBrush averageBrush = new SolidBrush(averageColor))
+                        using (var averageBrush = new SolidBrush(averageColor))
                         {
-                            graphics.FillRectangle(averageBrush, x, y, blockSize, blockSize);
+                            graphics.FillRectangle(averageBrush, row,  column, blockSize, blockSize);
                         }
                     }
                 }

@@ -6,20 +6,16 @@ namespace GroupEMosaicator.View.Overlays
     {
 
 
-        public override Image CreateGrid(Image image, int blocks)
+        public override Image CreateGrid(Image image, int blockSize)
         {
-            int numOfCells = image.Width / blocks + 1;
+            int numOfCells = image.Width / blockSize + 1;
             Graphics graphics = Graphics.FromImage(image);
             var pen = new Pen(Color.White);
 
-            for (int y = 0; y < numOfCells; ++y)
+            for (int y = 0; y < numOfCells; y++)
             {
-                graphics.DrawLine(pen, 0, y * blocks, numOfCells * blocks, y * blocks);
-            }
-
-            for (int x = 0; x < numOfCells; ++x)
-            {
-                graphics.DrawLine(pen, x * blocks, 0, x * blocks, numOfCells * blocks);
+                graphics.DrawLine(pen, 0, y * blockSize, numOfCells * blockSize, y * blockSize);
+                graphics.DrawLine(pen, y * blockSize, 0, y * blockSize, numOfCells * blockSize);
             }
 
             return image;
