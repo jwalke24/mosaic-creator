@@ -122,12 +122,17 @@ namespace GroupEMosaicator.View
 
         private void createBlockMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mosaicImageBox.Image = this.blockManager.CreateBlockMosaic(this.BlockSizeTextBox,
-                (Bitmap) this.originalImage);
+    
         }
 
         private void createPictureMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
+        }
+
+        private void squareBlocksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.mosaicImageBox.Image = this.blockManager.CreateSquareBlockMosaic(this.BlockSizeTextBox,
+                (Bitmap)this.originalImage);
         }
     }
 }

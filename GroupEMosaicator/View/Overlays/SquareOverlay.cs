@@ -2,10 +2,20 @@
 
 namespace GroupEMosaicator.View.Overlays
 {
+
+
+    /// <summary>
+    /// Square Grid overlay class
+    /// </summary>
     public class SquareOverlay : ShapeOverlay
     {
 
-
+        /// <summary>
+        /// Creates the square grid.
+        /// </summary>
+        /// <param name="image">The image.</param>
+        /// <param name="blockSize">Size of the block.</param>
+        /// <returns></returns>
         public override Image CreateGrid(Image image, int blockSize)
         {
             int numOfCells = image.Width / blockSize + 1;
