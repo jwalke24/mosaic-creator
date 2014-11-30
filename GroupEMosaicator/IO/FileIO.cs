@@ -1,23 +1,20 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace GroupEMosaicator.IO
 {
-    public class Fileio
+    public static class FileIo
     {
-        private readonly PictureBox pictureBox;
+        #region Public Methods
 
-        public Fileio(PictureBox pictureBox)
+        public static Bitmap OpenFile()
         {
-            this.pictureBox = pictureBox;
-        }
-
-        public Bitmap OpenFile()
-        {
-            var openDialog = new OpenFileDialog();
+            var openDialog = new OpenFileDialog { Title = @"Open..." };
 
             filterFileExtensions(openDialog);
 
@@ -25,9 +22,8 @@ namespace GroupEMosaicator.IO
             {
                 try
                 {
-                    Stream imageStream = openDialog.OpenFile();
-                    var image = new Bitmap(imageStream);
-                    return image;
+                    var imageStream = openDialog.OpenFile();
+                    return new Bitmap(imageStream);
                 }
                 catch (Exception ex)
                 {
@@ -38,58 +34,94 @@ namespace GroupEMosaicator.IO
             return null;
         }
 
-        public void SaveFile()
+        public static void SaveFile(Image image)
         {
-            var saveDialog = new SaveFileDialog();
+            var saveDialog = new SaveFileDialog { Title = @"Save..." };
+
             filterFileExtensions(saveDialog);
-            saveDialog.Title = "Save the File";
+
             if (saveDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    Stream imageStream = saveDialog.OpenFile();
+                    var imageStream = saveDialog.OpenFile();
 
                     switch (saveDialog.FilterIndex)
                     {
                         case 1:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Jpeg);
+                            image.Save(imageStream, ImageFormat.Jpeg);
                             break;
                         case 2:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Gif);
+                            image.Save(imageStream, ImageFormat.Gif);
                             break;
                         case 3:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Bmp);
+                            image.Save(imageStream, ImageFormat.Bmp);
                             break;
                         case 4:
-                            pictureBox.Image.Save(imageStream, ImageFormat.Png);
+                            image.Save(imageStream, ImageFormat.Png);
                             break;
                     }
                     imageStream.Close();
                 }
-
                 catch (Exception ex)
                 {
                     MessageBox.Show(@"Oops! It seems there was a problem saving the image. Please try again!");
                     Console.WriteLine(ex.StackTrace);
                 }
             }
-            //TODO set up saving file
         }
 
-        private void filterFileExtensions(OpenFileDialog openDialog)
+        public static List<Image> ReadImagesFromFolder()
+        {
+            var images = new List<Image>();
+
+            var folderDialog = new FolderBrowserDialog();
+
+            if (folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    var directory = new DirectoryInfo(folderDialog.SelectedPath);
+
+                    var files = readImageFilesFromDirectory(directory);
+
+                    foreach (var fileInfo in files)
+                    {
+                        var imageStream = fileInfo.OpenRead();
+                        images.Add(new Bitmap(imageStream));
+                    }
+                }
+                catch (IOException ex)
+                {
+                    MessageBox.Show(@"Oops! There was a problem reading images from the folder. Please try again!");
+                    Console.WriteLine(ex.StackTrace);
+                }
+            }
+
+            return images;
+        }
+
+        #endregion
+
+        #region Private Helper Methods
+
+        private static IEnumerable<FileInfo> readImageFilesFromDirectory(DirectoryInfo directory)
+        {
+            string[] extensions = { ".jpg", ".png", ".bmp", ".gif" };
+
+            return directory.GetFiles()
+                .Where(file => extensions.Contains(file.Extension.ToLower()))
+                .ToList();
+        }
+
+        private static void filterFileExtensions(FileDialog fileDialog)
         {
             const string imageFilters =
                 "JPEG (*.jpg)|*.jpg|Bitmap (*.bmp)|*.bmp|GIF (*.gif)|*.gif|PNG (*.png)|*.png|" +
                 "Image Files (*.jpg;*.bmp;*.gif;*.png)|*.jpg;*.bmp;*.gif;*.png";
-            openDialog.Filter = imageFilters;
+            fileDialog.Filter = imageFilters;
         }
 
-        private void filterFileExtensions(SaveFileDialog saveDialog)
-        {
-            const string imageFilters =
-                "JPEG (*.jpg)|*.jpg|Bitmap (*.bmp)|*.bmp|GIF (*.gif)|*.gif|PNG (*.png)|*.png|" +
-                "Image Files (*.jpg;*.bmp;*.gif;*.png)|*.jpg;*.bmp;*.gif;*.png";
-            saveDialog.Filter = imageFilters;
-        }
+        #endregion
     }
 }

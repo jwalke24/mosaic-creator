@@ -64,6 +64,9 @@ namespace GroupEMosaicator.View
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.createBlockMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createPictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
+            this.imagePaletteLabel = new System.Windows.Forms.ToolStripLabel();
             this.menuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
@@ -89,6 +92,7 @@ namespace GroupEMosaicator.View
             // 
             this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openMenuItem,
+            this.openFolderToolStripMenuItem,
             this.saveMenuItem,
             this.exitMenuItem});
             this.fileMenu.Name = "fileMenu";
@@ -98,21 +102,22 @@ namespace GroupEMosaicator.View
             // openMenuItem
             // 
             this.openMenuItem.Name = "openMenuItem";
-            this.openMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openMenuItem.Size = new System.Drawing.Size(152, 22);
             this.openMenuItem.Text = "Open";
             this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
             // 
             // saveMenuItem
             // 
+            this.saveMenuItem.Enabled = false;
             this.saveMenuItem.Name = "saveMenuItem";
-            this.saveMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.saveMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveMenuItem.Text = "Save";
             this.saveMenuItem.Click += new System.EventHandler(this.saveMenuItem_Click);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitMenuItem.Text = "Exit";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
@@ -135,15 +140,19 @@ namespace GroupEMosaicator.View
             // 
             // solidBlockMosaicToolStripMenuItem
             // 
+            this.solidBlockMosaicToolStripMenuItem.Enabled = false;
             this.solidBlockMosaicToolStripMenuItem.Name = "solidBlockMosaicToolStripMenuItem";
             this.solidBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.solidBlockMosaicToolStripMenuItem.Text = "Solid Block Mosaic";
+            this.solidBlockMosaicToolStripMenuItem.Click += new System.EventHandler(this.solidBlockMosaicToolStripMenuItem_Click);
             // 
             // pictureMosaicToolStripMenuItem
             // 
+            this.pictureMosaicToolStripMenuItem.Enabled = false;
             this.pictureMosaicToolStripMenuItem.Name = "pictureMosaicToolStripMenuItem";
             this.pictureMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
             this.pictureMosaicToolStripMenuItem.Text = "Picture Mosaic";
+            this.pictureMosaicToolStripMenuItem.Click += new System.EventHandler(this.pictureMosaicToolStripMenuItem_Click);
             // 
             // helpMenu
             // 
@@ -227,7 +236,9 @@ namespace GroupEMosaicator.View
             this.toolStripSeparator1,
             this.blockSizeTextBox,
             this.toolStripSeparator3,
-            this.toolStripSplitButton1});
+            this.toolStripSplitButton1,
+            this.toolStripSeparator5,
+            this.imagePaletteLabel});
             this.toolStrip1.Location = new System.Drawing.Point(0, 24);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(777, 25);
@@ -252,6 +263,7 @@ namespace GroupEMosaicator.View
             // saveButton
             // 
             this.saveButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.saveButton.Enabled = false;
             this.saveButton.Image = ((System.Drawing.Image)(resources.GetObject("saveButton.Image")));
             this.saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveButton.Name = "saveButton";
@@ -270,6 +282,7 @@ namespace GroupEMosaicator.View
             this.toolStripGridButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addGridToolStripMenuItem,
             this.removeGridToolStripMenuItem});
+            this.toolStripGridButton.Enabled = false;
             this.toolStripGridButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripGridButton.Image")));
             this.toolStripGridButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripGridButton.Name = "toolStripGridButton";
@@ -282,7 +295,7 @@ namespace GroupEMosaicator.View
             this.squareGridToolStripMenuItem,
             this.traingleGridToolStripMenuItem});
             this.addGridToolStripMenuItem.Name = "addGridToolStripMenuItem";
-            this.addGridToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.addGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.addGridToolStripMenuItem.Text = "Add Grid";
             // 
             // squareGridToolStripMenuItem
@@ -302,7 +315,7 @@ namespace GroupEMosaicator.View
             // removeGridToolStripMenuItem
             // 
             this.removeGridToolStripMenuItem.Name = "removeGridToolStripMenuItem";
-            this.removeGridToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.removeGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.removeGridToolStripMenuItem.Text = "Remove Grid";
             this.removeGridToolStripMenuItem.Click += new System.EventHandler(this.removeGridToolStripMenuItem_Click);
             // 
@@ -313,6 +326,7 @@ namespace GroupEMosaicator.View
             // 
             // blockSizeTextBox
             // 
+            this.blockSizeTextBox.Enabled = false;
             this.blockSizeTextBox.Name = "blockSizeTextBox";
             this.blockSizeTextBox.Size = new System.Drawing.Size(90, 25);
             this.blockSizeTextBox.Text = "Enter Block Size";
@@ -338,6 +352,7 @@ namespace GroupEMosaicator.View
             // 
             // createBlockMosaicToolStripMenuItem
             // 
+            this.createBlockMosaicToolStripMenuItem.Enabled = false;
             this.createBlockMosaicToolStripMenuItem.Name = "createBlockMosaicToolStripMenuItem";
             this.createBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.createBlockMosaicToolStripMenuItem.Text = "Create Block Mosaic";
@@ -345,10 +360,29 @@ namespace GroupEMosaicator.View
             // 
             // createPictureMosaicToolStripMenuItem
             // 
+            this.createPictureMosaicToolStripMenuItem.Enabled = false;
             this.createPictureMosaicToolStripMenuItem.Name = "createPictureMosaicToolStripMenuItem";
             this.createPictureMosaicToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.createPictureMosaicToolStripMenuItem.Text = "Create Picture Mosaic";
             this.createPictureMosaicToolStripMenuItem.Click += new System.EventHandler(this.createPictureMosaicToolStripMenuItem_Click);
+            // 
+            // openFolderToolStripMenuItem
+            // 
+            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFolderToolStripMenuItem.Text = "Open Folder";
+            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator5
+            // 
+            this.toolStripSeparator5.Name = "toolStripSeparator5";
+            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
+            // 
+            // imagePaletteLabel
+            // 
+            this.imagePaletteLabel.Name = "imagePaletteLabel";
+            this.imagePaletteLabel.Size = new System.Drawing.Size(106, 22);
+            this.imagePaletteLabel.Text = "0 images in palette";
             // 
             // MosaicForm
             // 
@@ -410,6 +444,9 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.ToolStripSplitButton toolStripSplitButton1;
         private System.Windows.Forms.ToolStripMenuItem createBlockMosaicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createPictureMosaicToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFolderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.ToolStripLabel imagePaletteLabel;
     }
 }
 
