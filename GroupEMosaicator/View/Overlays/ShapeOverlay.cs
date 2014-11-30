@@ -2,6 +2,10 @@
 
 namespace GroupEMosaicator.View.Overlays
 {
+
+    /// <summary>
+    /// Parent class for shape overlays
+    /// </summary>
     public abstract class ShapeOverlay
     {
 

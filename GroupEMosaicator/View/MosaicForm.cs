@@ -53,7 +53,7 @@ namespace GroupEMosaicator.View
                 this.enableBlockMosaicControls();
                 this.enablePictureMosaicControls();
             }
-        }
+            }
 
         private void enableBlockMosaicControls()
         {
@@ -68,8 +68,8 @@ namespace GroupEMosaicator.View
             if (this.mosaicImageBox.Image != null)
             {
                 FileIo.SaveFile(this.mosaicImageBox.Image);
-            }
-            
+        }
+
         }
 
         private void exitMenuItem_Click(object sender, EventArgs e)
@@ -136,13 +136,6 @@ namespace GroupEMosaicator.View
             this.saveMenuItem_Click(sender, e);
         }
 
-        private void createBlockMosaicToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.mosaicImageBox.Image = this.blockManager.CreateBlockMosaic(this.BlockSizeTextBox,
-                (Bitmap) this.originalImage);
-            this.enableSavingControls();
-        }
-
         private void enableSavingControls()
         {
             this.saveButton.Enabled = true;
@@ -184,12 +177,23 @@ namespace GroupEMosaicator.View
 
         private void solidBlockMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.createBlockMosaicToolStripMenuItem_Click(sender, e);
+            this.squareBlocksToolStripMenuItem_Click(sender, e);
         }
 
         private void pictureMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.createPictureMosaicToolStripMenuItem_Click(sender, e);
+        }
+
+        private void squareBlocksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.mosaicImageBox.Image = this.blockManager.CreateSquareBlockMosaic(this.BlockSizeTextBox,
+                (Bitmap)this.originalImage);
+
+            if (this.mosaicImageBox.Image != null)
+            {
+                this.enableSavingControls();
+            }
         }
     }
 }

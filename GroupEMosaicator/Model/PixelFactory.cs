@@ -41,12 +41,19 @@ namespace GroupEMosaicator.Model
                     blueSum += color.B;
                 }
             }
-            int redValue = (redSum / (area.Width * area.Height + 1));
-            int greenValue = (greenSum / (area.Width * area.Height + 1));
-            int blueValue = (blueSum / (area.Width * area.Height + 1));
+
+            var newColor = getNewColor(area, redSum, greenSum, blueSum);
+
+            return newColor;
+        }
+
+        private static Color getNewColor(Rectangle area, int redSum, int greenSum, int blueSum)
+        {
+            int redValue = (redSum/(area.Width*area.Height + 1));
+            int greenValue = (greenSum/(area.Width*area.Height + 1));
+            int blueValue = (blueSum/(area.Width*area.Height + 1));
 
             Color newColor = Color.FromArgb(255, redValue, greenValue, blueValue);
-
             return newColor;
         }
     }
