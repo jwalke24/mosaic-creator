@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using GroupEMosaicator.Controller;
 using GroupEMosaicator.IO;
-using GroupEMosaicator.Model;
 using GroupEMosaicator.View.Overlays;
 
 namespace GroupEMosaicator.View
 {
     public partial class MosaicForm : Form
     {
-        private readonly MosaicCreator blockManager;
+        private readonly MosaicController mosaicManager;
         private Image originalImage;
 
         public MosaicForm()
         {
             this.InitializeComponent();
-            this.blockManager = new MosaicCreator();
+            this.mosaicManager = new MosaicController();
         }
-
-        public List<Image> ImagePalette { get; private set; }
 
         public int BlockSizeTextBox
         {
@@ -144,7 +141,10 @@ namespace GroupEMosaicator.View
 
         private void createPictureMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.ImagePalette.Capacity != 0)
+            this.mosaicImageBox.Image = this.mosaicManager.CreatePictureMosaic(this.BlockSizeTextBox,
+                (Image) this.originalImage.Clone());
+
+            if (this.mosaicImageBox.Image != null)
             {
                 this.enableSavingControls();
             }
@@ -152,11 +152,11 @@ namespace GroupEMosaicator.View
 
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.ImagePalette = new List<Image>(FileIo.ReadImagesFromFolder());
+            this.mosaicManager.ReadImagesFromFolder();
 
-            if (this.ImagePalette.Capacity != 0)
+            if (this.mosaicManager.PaletteImages.Capacity != 0)
             {
-                this.imagePaletteLabel.Text = this.ImagePalette.Capacity + @" images in palette";
+                this.imagePaletteLabel.Text = this.mosaicManager.PaletteImages.Capacity + @" images in palette";
                 this.enablePictureMosaicControls();
             }
         }
@@ -172,7 +172,7 @@ namespace GroupEMosaicator.View
 
         private bool pictureMosaicCanBeCreated()
         {
-            return (this.originalImageBox.Image != null) && (this.ImagePalette != null) && (this.ImagePalette.Capacity != 0);
+            return (this.originalImageBox.Image != null) && (this.mosaicManager.PaletteImages.Capacity != 0);
         }
 
         private void solidBlockMosaicToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,8 +187,7 @@ namespace GroupEMosaicator.View
 
         private void squareBlocksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mosaicImageBox.Image = this.blockManager.CreateSquareBlockMosaic(this.BlockSizeTextBox,
-                (Bitmap)this.originalImage);
+            this.mosaicImageBox.Image = this.mosaicManager.CreateSquareBlockMosaic(this.BlockSizeTextBox, this.originalImage);
 
             if (this.mosaicImageBox.Image != null)
             {

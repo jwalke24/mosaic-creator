@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\MosaicController.cs" />
     <Compile Include="IO\FileIO.cs" />
     <Compile Include="Model\PixelFactory.cs" />
     <Compile Include="Model\MosaicCreator.cs" />
