@@ -22,8 +22,7 @@ namespace GroupEMosaicator.IO
             {
                 try
                 {
-                    var imageStream = openDialog.OpenFile();
-                    return new Bitmap(imageStream);
+                    return new Bitmap(openDialog.OpenFile());
                 }
                 catch (Exception ex)
                 {
@@ -87,8 +86,7 @@ namespace GroupEMosaicator.IO
 
                     foreach (var fileInfo in files)
                     {
-                        var imageStream = fileInfo.OpenRead();
-                        images.Add(new Bitmap(imageStream));
+                        images.Add(Image.FromStream(fileInfo.Open(FileMode.Open, FileAccess.Read, FileShare.None)));
                     }
                 }
                 catch (IOException ex)

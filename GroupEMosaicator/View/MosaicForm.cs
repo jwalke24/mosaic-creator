@@ -152,7 +152,7 @@ namespace GroupEMosaicator.View
 
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.ImagePalette = FileIo.ReadImagesFromFolder();
+            this.ImagePalette = new List<Image>(FileIo.ReadImagesFromFolder());
 
             if (this.ImagePalette.Capacity != 0)
             {
