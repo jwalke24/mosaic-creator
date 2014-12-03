@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace GroupEMosaicator.Model
 {
     internal class MosaicCreator
     {
+        private List<Color> paletteColors;
+
         /// <summary>
         ///     Creates the square block mosaic.
         /// </summary>
@@ -70,19 +73,20 @@ namespace GroupEMosaicator.Model
         /// <param name="blockSize">Size of the block.</param>
         /// <param name="bitmap">The image.</param>
         /// <param name="palette">The palette.</param>
-        /// <param name="paletteColors">The average colors of images in the palette.</param>
         /// <returns></returns>
-        public Image CreatePictureMosaic(int blockSize, Bitmap bitmap, List<Image> palette, List<Color> paletteColors)
+        public Image CreatePictureMosaic(int blockSize, Bitmap bitmap, ImageList.ImageCollection palette)
         {
-            var g = Graphics.FromImage(bitmap);
+            Graphics g = Graphics.FromImage(bitmap);
+
+            this.paletteColors = new List<Color>(this.averagePaletteColors(palette));
 
             for (int y = 0; y < bitmap.Height; y += blockSize)
             {
                 for (int x = 0; x < bitmap.Width; x += blockSize)
                 {
                     var dstRect = new Rectangle(x, y, blockSize, blockSize);
-                    var averageColor = PixelFactory.GetAverageColor(dstRect, bitmap);
-                    var bestMatchImage = (Bitmap)this.getBestMatchPaletteImage(averageColor, paletteColors, palette);
+                    Color averageColor = PixelFactory.GetAverageColor(dstRect, bitmap);
+                    Image bestMatchImage = this.getBestMatchPaletteImage(averageColor, palette);
                     var srcRect = new Rectangle(0, 0, bestMatchImage.Width, bestMatchImage.Height);
                     g.DrawImage(bestMatchImage, dstRect, srcRect, GraphicsUnit.Pixel);
                 }
@@ -92,19 +96,33 @@ namespace GroupEMosaicator.Model
             return bitmap;
         }
 
-        private Image getBestMatchPaletteImage(Color averageColor, List<Color> paletteColors, List<Image> palette)
+        private IEnumerable<Color> averagePaletteColors(ImageList.ImageCollection palette)
         {
-            var smallestDifference = Double.MaxValue;
-            var bestMatchIndex = 0;
+            var averageColors = new List<Color>();
 
-            foreach (var currentColor in paletteColors)
+            for (int i = 0; i < palette.Count; i++)
             {
-                var colorDifference = this.calculateColorDifference(averageColor, currentColor);
+                var srcRect = new Rectangle(0, 0, palette[i].Width, palette[i].Height);
+                Color currentAverage = PixelFactory.GetAverageColor(srcRect, (Bitmap) palette[i]);
+                averageColors.Add(currentAverage);
+            }
+
+            return averageColors;
+        }
+
+        private Image getBestMatchPaletteImage(Color averageColor, ImageList.ImageCollection palette)
+        {
+            double smallestDifference = Double.MaxValue;
+            int bestMatchIndex = 0;
+
+            foreach (Color currentColor in this.paletteColors)
+            {
+                double colorDifference = this.calculateColorDifference(averageColor, currentColor);
 
                 if (colorDifference < smallestDifference)
                 {
                     smallestDifference = colorDifference;
-                    bestMatchIndex = paletteColors.IndexOf(currentColor);
+                    bestMatchIndex = this.paletteColors.IndexOf(currentColor);
                 }
             }
 
@@ -113,11 +131,13 @@ namespace GroupEMosaicator.Model
 
         private double calculateColorDifference(Color averageColor, Color paletteColor)
         {
-            long redMean = (averageColor.R + paletteColor.R) / 2;
+            long redMean = (averageColor.R + paletteColor.R)/2;
             long redDifference = averageColor.R - paletteColor.R;
             long greenDifference = averageColor.G - paletteColor.G;
             long blueDifference = averageColor.B - paletteColor.B;
-            return Math.Sqrt((((512 + redMean) * redDifference * redDifference) >> 8) + 4 * greenDifference * greenDifference + (((767 - redMean) * blueDifference * blueDifference) >> 8));
+            return
+                Math.Sqrt((redDifference*redDifference) + (greenDifference*greenDifference) +
+                          (blueDifference*blueDifference));
         }
     }
 }

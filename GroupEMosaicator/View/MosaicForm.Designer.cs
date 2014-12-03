@@ -30,6 +30,7 @@ namespace GroupEMosaicator.View
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MosaicForm));
             this.menuBar = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,7 +50,7 @@ namespace GroupEMosaicator.View
             this.originalTabPage = new System.Windows.Forms.TabPage();
             this.mosaicTabPage = new System.Windows.Forms.TabPage();
             this.mosaicImageBox = new System.Windows.Forms.PictureBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolBar = new System.Windows.Forms.ToolStrip();
             this.openButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.saveButton = new System.Windows.Forms.ToolStripButton();
@@ -69,13 +70,16 @@ namespace GroupEMosaicator.View
             this.createPictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.imagePaletteLabel = new System.Windows.Forms.ToolStripLabel();
+            this.imagePalette = new System.Windows.Forms.ImageList(this.components);
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewPaletteButton = new System.Windows.Forms.ToolStripButton();
             this.menuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
             this.originalTabPage.SuspendLayout();
             this.mosaicTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).BeginInit();
-            this.toolStrip1.SuspendLayout();
+            this.toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuBar
@@ -240,9 +244,9 @@ namespace GroupEMosaicator.View
             this.mosaicImageBox.TabIndex = 0;
             this.mosaicImageBox.TabStop = false;
             // 
-            // toolStrip1
+            // toolBar
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openButton,
             this.toolStripSeparator4,
             this.saveButton,
@@ -253,12 +257,14 @@ namespace GroupEMosaicator.View
             this.toolStripSeparator3,
             this.toolStripSplitButton1,
             this.toolStripSeparator5,
-            this.imagePaletteLabel});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(777, 25);
-            this.toolStrip1.TabIndex = 8;
-            this.toolStrip1.Text = "toolStrip1";
+            this.imagePaletteLabel,
+            this.toolStripSeparator6,
+            this.viewPaletteButton});
+            this.toolBar.Location = new System.Drawing.Point(0, 24);
+            this.toolBar.Name = "toolBar";
+            this.toolBar.Size = new System.Drawing.Size(777, 25);
+            this.toolBar.TabIndex = 8;
+            this.toolBar.Text = "toolStrip1";
             // 
             // openButton
             // 
@@ -409,12 +415,33 @@ namespace GroupEMosaicator.View
             this.imagePaletteLabel.Size = new System.Drawing.Size(106, 22);
             this.imagePaletteLabel.Text = "0 images in palette";
             // 
+            // imagePalette
+            // 
+            this.imagePalette.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imagePalette.ImageSize = new System.Drawing.Size(16, 16);
+            this.imagePalette.TransparentColor = System.Drawing.Color.Transparent;
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // viewPaletteButton
+            // 
+            this.viewPaletteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.viewPaletteButton.Image = ((System.Drawing.Image)(resources.GetObject("viewPaletteButton.Image")));
+            this.viewPaletteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.viewPaletteButton.Name = "viewPaletteButton";
+            this.viewPaletteButton.Size = new System.Drawing.Size(75, 22);
+            this.viewPaletteButton.Text = "View Palette";
+            this.viewPaletteButton.ToolTipText = "View the images in the palette.";
+            // 
             // MosaicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 565);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.toolBar);
             this.Controls.Add(this.tabPane);
             this.Controls.Add(this.menuBar);
             this.MainMenuStrip = this.menuBar;
@@ -427,8 +454,8 @@ namespace GroupEMosaicator.View
             this.originalTabPage.ResumeLayout(false);
             this.mosaicTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolBar.ResumeLayout(false);
+            this.toolBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,7 +480,7 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.ToolStripMenuItem saveMenuItem;
         private System.Windows.Forms.ToolStripMenuItem solidBlockMosaicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pictureMosaicToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolBar;
         private System.Windows.Forms.ToolStripSplitButton toolStripGridButton;
         private System.Windows.Forms.ToolStripMenuItem addGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem squareGridToolStripMenuItem;
@@ -474,6 +501,9 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.ToolStripLabel imagePaletteLabel;
         private System.Windows.Forms.ToolStripMenuItem triangleBlocksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem squareBlocksToolStripMenuItem;
+        private System.Windows.Forms.ImageList imagePalette;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton viewPaletteButton;
     }
 }
 

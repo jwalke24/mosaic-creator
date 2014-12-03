@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using GroupEMosaicator.IO;
+﻿using System.Drawing;
+using System.Windows.Forms;
 using GroupEMosaicator.Model;
 
 namespace GroupEMosaicator.Controller
@@ -13,29 +12,11 @@ namespace GroupEMosaicator.Controller
         private readonly MosaicCreator creator;
 
         /// <summary>
-        ///     Gets the palette images.
-        /// </summary>
-        /// <value>
-        ///     The palette images.
-        /// </value>
-        public List<Image> PaletteImages { get; private set; }
-
-        /// <summary>
-        /// Gets the average colors of the palette images.
-        /// </summary>
-        /// <value>
-        ///     The average palette colors.
-        /// </value>
-        public List<Color> PaletteColors { get; private set; }
-
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="MosaicController"/> class.
+        ///     Initializes a new instance of the <see cref="MosaicController" /> class.
         /// </summary>
         public MosaicController()
         {
             this.creator = new MosaicCreator();
-            this.PaletteImages = new List<Image>();
-            this.PaletteColors = new List<Color>();
         }
 
         /// <summary>
@@ -67,47 +48,21 @@ namespace GroupEMosaicator.Controller
         /// </summary>
         /// <param name="blockSize">Size of the block.</param>
         /// <param name="image">The image.</param>
-        /// <returns>A picture mosaic image.</returns>
-        public Image CreatePictureMosaic(int blockSize, Image image)
+        /// <param name="palette">The palette.</param>
+        /// <returns>
+        ///     A picture mosaic image.
+        /// </returns>
+        public Image CreatePictureMosaic(int blockSize, Image image, ImageList.ImageCollection palette)
         {
             Image mosaicImage = null;
 
-            if (this.PaletteImages.Capacity != 0 && this.PaletteColors.Capacity != 0)
+            if (palette.Count > 0)
             {
                 var bitmap = new Bitmap(image);
-                mosaicImage = this.creator.CreatePictureMosaic(blockSize, bitmap, this.PaletteImages, this.PaletteColors);
+                mosaicImage = this.creator.CreatePictureMosaic(blockSize, bitmap, palette);
             }
 
             return mosaicImage;
-        }
-
-        /// <summary>
-        ///     Reads the palette images from a folder.
-        /// </summary>
-        public void ReadImagesFromFolder()
-        {
-            var images = FileIo.ReadImagesFromFolder();
-            this.PaletteImages = new List<Image>(images);
-
-            if (this.PaletteImages.Capacity != 0)
-            {
-                this.PaletteColors = new List<Color>(this.getPaletteColors());
-            }
-            
-        }
-
-        private IEnumerable<Color> getPaletteColors()
-        {
-            var paletteColors = new List<Color>();
-
-            foreach (var image in this.PaletteImages)
-            {
-                var imgRect = new Rectangle(0, 0, image.Width, image.Height);
-                var bitmap = (Bitmap) image;
-                paletteColors.Add(PixelFactory.GetAverageColor(imgRect, bitmap));
-            }
-
-            return paletteColors;
         }
     }
 }
