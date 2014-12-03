@@ -179,12 +179,14 @@ namespace GroupEMosaicator.View
             // helpMenuItem
             // 
             this.helpMenuItem.Name = "helpMenuItem";
+            this.helpMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
             this.helpMenuItem.Size = new System.Drawing.Size(152, 22);
             this.helpMenuItem.Text = "&Help";
             // 
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
+            this.aboutMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
             this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aboutMenuItem.Text = "&About";
             // 
