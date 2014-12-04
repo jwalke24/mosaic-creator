@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
 
 namespace GroupEMosaicator.View
@@ -31,11 +30,15 @@ namespace GroupEMosaicator.View
             this.imagePaletteView.LargeImageList = imageList;
             this.imagePaletteView.LargeImageList.ImageSize = new Size(100, 100);
             this.imagePaletteView.LargeImageList.ColorDepth = ColorDepth.Depth32Bit;
+            this.populatePaletteViewLargeImageList();
+        }
 
+        private void populatePaletteViewLargeImageList()
+        {
             for (int i = 0; i < this.imagePaletteView.LargeImageList.Images.Count; i++)
             {
                 int imageNumber = i + 1;
-                var item = new ListViewItem(imageNumber.ToString(CultureInfo.CurrentCulture), i);
+                var item = new ListViewItem(Convert.ToString(imageNumber), i);
                 this.imagePaletteView.Items.Add(item);
             }
         }

@@ -221,6 +221,11 @@ namespace GroupEMosaicator.View
 
         private void originalImageBox_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (this.originalImageBox.Image == null)
+            {
+                return;
+            }
+
             if (e.Delta > 0)
             {
                 this.zoomIn(this.originalImageBox, this.originalImagePanel);
@@ -267,6 +272,11 @@ namespace GroupEMosaicator.View
 
         private void mosaicImageBox_MouseWheel(object sender, MouseEventArgs e)
         {
+            if (this.mosaicImageBox.Image == null)
+            {
+                return;
+            }
+
             if (e.Delta > 0)
             {
                 this.zoomIn(this.mosaicImageBox, this.mosaicImagePanel);
