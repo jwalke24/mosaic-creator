@@ -70,9 +70,9 @@ namespace GroupEMosaicator.View
             this.createPictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.imagePaletteLabel = new System.Windows.Forms.ToolStripLabel();
-            this.imagePalette = new System.Windows.Forms.ImageList(this.components);
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.viewPaletteButton = new System.Windows.Forms.ToolStripButton();
+            this.imagePalette = new System.Windows.Forms.ImageList(this.components);
             this.menuBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
@@ -184,18 +184,21 @@ namespace GroupEMosaicator.View
             // 
             this.helpMenuItem.Name = "helpMenuItem";
             this.helpMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
-            this.helpMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.helpMenuItem.Size = new System.Drawing.Size(149, 22);
             this.helpMenuItem.Text = "&Help";
             // 
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
             this.aboutMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.aboutMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutMenuItem.Size = new System.Drawing.Size(149, 22);
             this.aboutMenuItem.Text = "&About";
             // 
             // originalImageBox
             // 
+            this.originalImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.originalImageBox.Location = new System.Drawing.Point(0, 0);
             this.originalImageBox.Name = "originalImageBox";
             this.originalImageBox.Size = new System.Drawing.Size(775, 488);
@@ -205,6 +208,9 @@ namespace GroupEMosaicator.View
             // 
             // tabPane
             // 
+            this.tabPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabPane.Controls.Add(this.originalTabPage);
             this.tabPane.Controls.Add(this.mosaicTabPage);
             this.tabPane.Location = new System.Drawing.Point(0, 52);
@@ -237,6 +243,9 @@ namespace GroupEMosaicator.View
             // 
             // mosaicImageBox
             // 
+            this.mosaicImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.mosaicImageBox.Location = new System.Drawing.Point(0, 0);
             this.mosaicImageBox.Name = "mosaicImageBox";
             this.mosaicImageBox.Size = new System.Drawing.Size(771, 488);
@@ -415,12 +424,6 @@ namespace GroupEMosaicator.View
             this.imagePaletteLabel.Size = new System.Drawing.Size(106, 22);
             this.imagePaletteLabel.Text = "0 images in palette";
             // 
-            // imagePalette
-            // 
-            this.imagePalette.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-            this.imagePalette.ImageSize = new System.Drawing.Size(16, 16);
-            this.imagePalette.TransparentColor = System.Drawing.Color.Transparent;
-            // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
@@ -429,12 +432,20 @@ namespace GroupEMosaicator.View
             // viewPaletteButton
             // 
             this.viewPaletteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.viewPaletteButton.Enabled = false;
             this.viewPaletteButton.Image = ((System.Drawing.Image)(resources.GetObject("viewPaletteButton.Image")));
             this.viewPaletteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.viewPaletteButton.Name = "viewPaletteButton";
             this.viewPaletteButton.Size = new System.Drawing.Size(75, 22);
             this.viewPaletteButton.Text = "View Palette";
             this.viewPaletteButton.ToolTipText = "View the images in the palette.";
+            this.viewPaletteButton.Click += new System.EventHandler(this.viewPaletteButton_Click);
+            // 
+            // imagePalette
+            // 
+            this.imagePalette.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imagePalette.ImageSize = new System.Drawing.Size(16, 16);
+            this.imagePalette.TransparentColor = System.Drawing.Color.Transparent;
             // 
             // MosaicForm
             // 

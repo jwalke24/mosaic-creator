@@ -1,17 +1,24 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 using GroupEMosaicator.Controller;
 using GroupEMosaicator.IO;
 using GroupEMosaicator.View.Overlays;
 
 namespace GroupEMosaicator.View
 {
+    /// <summary>
+    ///     This class represents the main form of the GUI.
+    /// </summary>
     public partial class MosaicForm : Form
     {
         private readonly MosaicController mosaicManager;
         private Image originalImage;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MosaicForm"/> class.
+        /// </summary>
         public MosaicForm()
         {
             this.InitializeComponent();
@@ -19,6 +26,12 @@ namespace GroupEMosaicator.View
             this.imagePalette = new ImageList();
         }
 
+        /// <summary>
+        ///     Gets the block size from its respective text box after checking input validity.
+        /// </summary>
+        /// <value>
+        ///     The valid block size.
+        /// </value>
         public int BlockSizeTextBox
         {
             get
@@ -154,11 +167,12 @@ namespace GroupEMosaicator.View
         {
             this.imagePalette.Images.Clear();
             this.imagePalette.Images.AddRange(FileIo.ReadImagesFromFolder().ToArray());
+            this.imagePaletteLabel.Text = this.imagePalette.Images.Count + @" images in palette";
+            this.enablePictureMosaicControls();
 
             if (this.imagePalette.Images.Count > 0)
             {
-                this.imagePaletteLabel.Text = this.imagePalette.Images.Count + @" images in palette";
-                this.enablePictureMosaicControls();
+                this.viewPaletteButton.Enabled = true;
             }
         }
 
@@ -195,6 +209,12 @@ namespace GroupEMosaicator.View
             {
                 this.enableSavingControls();
             }
+        }
+
+        private void viewPaletteButton_Click(object sender, EventArgs e)
+        {
+            var paletteForm = new PaletteForm(this.imagePalette) {Owner = this};
+            paletteForm.ShowDialog();
         }
     }
 }
