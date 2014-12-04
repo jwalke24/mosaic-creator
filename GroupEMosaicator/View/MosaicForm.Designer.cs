@@ -369,6 +369,7 @@ namespace GroupEMosaicator.View
             this.blockSizeTextBox.Text = "Enter Block Size";
             this.blockSizeTextBox.Leave += new System.EventHandler(this.blockSizeTextBox_Left);
             this.blockSizeTextBox.Click += new System.EventHandler(this.blockSizeTextBox_Click);
+            this.blockSizeTextBox.TextChanged += new System.EventHandler(this.blockSizeTextBox_TextChanged);
             // 
             // toolStripSeparator3
             // 

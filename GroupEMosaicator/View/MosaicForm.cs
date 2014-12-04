@@ -162,6 +162,8 @@ namespace GroupEMosaicator.View
             if (this.mosaicImageBox.Image != null)
             {
                 this.enableSavingControls();
+                this.pictureMosaicToolStripMenuItem.Enabled = false;
+                this.createPictureMosaicToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -210,6 +212,8 @@ namespace GroupEMosaicator.View
             if (this.mosaicImageBox.Image != null)
             {
                 this.enableSavingControls();
+                this.createBlockMosaicToolStripMenuItem.Enabled = false;
+                this.solidBlockMosaicToolStripMenuItem.Enabled = false;
             }
         }
 
@@ -285,6 +289,12 @@ namespace GroupEMosaicator.View
             {
                 this.zoomOut(this.mosaicImageBox, this.mosaicImagePanel);
             }
+        }
+
+        private void blockSizeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.enableBlockMosaicControls();
+            this.enablePictureMosaicControls();
         }
     }
 }
