@@ -11,7 +11,7 @@ namespace GroupEMosaicator.View
     public partial class PaletteForm : Form
     {
         /// <summary>
-        ///     Initializes a new instance of the <see cref="PaletteForm"/> class.
+        ///     Initializes a new instance of the <see cref="PaletteForm" /> class.
         /// </summary>
         /// <param name="imageList">The image list.</param>
         /// <exception cref="System.ArgumentNullException">Thrown if the image list is null.</exception>
@@ -22,7 +22,7 @@ namespace GroupEMosaicator.View
                 throw new ArgumentNullException();
             }
 
-            InitializeComponent();
+            this.InitializeComponent();
             this.setUpPaletteView(imageList);
         }
 
@@ -34,7 +34,7 @@ namespace GroupEMosaicator.View
 
             for (int i = 0; i < this.imagePaletteView.LargeImageList.Images.Count; i++)
             {
-                var imageNumber = i + 1;
+                int imageNumber = i + 1;
                 var item = new ListViewItem(imageNumber.ToString(CultureInfo.CurrentCulture), i);
                 this.imagePaletteView.Items.Add(item);
             }

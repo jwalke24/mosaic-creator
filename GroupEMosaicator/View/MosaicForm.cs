@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 using GroupEMosaicator.Controller;
 using GroupEMosaicator.IO;
 using GroupEMosaicator.View.Overlays;
@@ -13,11 +12,14 @@ namespace GroupEMosaicator.View
     /// </summary>
     public partial class MosaicForm : Form
     {
+        private const double ZoomFactor = 1.10;
+        private const int ZoomMinMax = 10;
+
         private readonly MosaicController mosaicManager;
         private Image originalImage;
 
         /// <summary>
-        ///     Initializes a new instance of the <see cref="MosaicForm"/> class.
+        ///     Initializes a new instance of the <see cref="MosaicForm" /> class.
         /// </summary>
         public MosaicForm()
         {
@@ -215,6 +217,64 @@ namespace GroupEMosaicator.View
         {
             var paletteForm = new PaletteForm(this.imagePalette) {Owner = this};
             paletteForm.ShowDialog();
+        }
+
+        private void originalImageBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                this.zoomIn(this.originalImageBox, this.originalImagePanel);
+            }
+            else
+            {
+                this.zoomOut(this.originalImageBox, this.originalImagePanel);
+            }
+        }
+
+        private void zoomOut(PictureBox pictureBox, Panel panel)
+        {
+            if ((pictureBox.Width > (panel.Width/ZoomMinMax)) && (pictureBox.Height > (panel.Height/ZoomMinMax)))
+            {
+                pictureBox.Width = Convert.ToInt32(pictureBox.Width/ZoomFactor);
+                pictureBox.Height = Convert.ToInt32(pictureBox.Height/ZoomFactor);
+            }
+        }
+
+        private void zoomIn(PictureBox pictureBox, Panel panel)
+        {
+            if ((pictureBox.Width < (ZoomMinMax*panel.Width)) && (pictureBox.Height < (ZoomMinMax*panel.Height)))
+            {
+                pictureBox.Width = Convert.ToInt32(pictureBox.Width*ZoomFactor);
+                pictureBox.Height = Convert.ToInt32(pictureBox.Height*ZoomFactor);
+            }
+        }
+
+        private void originalImageBox_MouseEnter(object sender, EventArgs e)
+        {
+            if (this.originalImageBox.Focused == false)
+            {
+                this.originalImageBox.Focus();
+            }
+        }
+
+        private void mosaicImageBox_MouseEnter(object sender, EventArgs e)
+        {
+            if (this.mosaicImageBox.Focused == false)
+            {
+                this.mosaicImageBox.Focus();
+            }
+        }
+
+        private void mosaicImageBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                this.zoomIn(this.mosaicImageBox, this.mosaicImagePanel);
+            }
+            else
+            {
+                this.zoomOut(this.mosaicImageBox, this.mosaicImagePanel);
+            }
         }
     }
 }

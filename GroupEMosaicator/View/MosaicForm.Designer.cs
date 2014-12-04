@@ -1,4 +1,6 @@
-﻿using System.Security.AccessControl;
+﻿using System;
+using System.Security.AccessControl;
+using System.Windows.Forms;
 
 namespace GroupEMosaicator.View
 {
@@ -45,11 +47,11 @@ namespace GroupEMosaicator.View
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.originalImageBox = new System.Windows.Forms.PictureBox();
             this.tabPane = new System.Windows.Forms.TabControl();
             this.originalTabPage = new System.Windows.Forms.TabPage();
+            this.originalImagePanel = new System.Windows.Forms.Panel();
+            this.originalImageBox = new System.Windows.Forms.PictureBox();
             this.mosaicTabPage = new System.Windows.Forms.TabPage();
-            this.mosaicImageBox = new System.Windows.Forms.PictureBox();
             this.toolBar = new System.Windows.Forms.ToolStrip();
             this.openButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
@@ -73,13 +75,17 @@ namespace GroupEMosaicator.View
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
             this.viewPaletteButton = new System.Windows.Forms.ToolStripButton();
             this.imagePalette = new System.Windows.Forms.ImageList(this.components);
+            this.mosaicImagePanel = new System.Windows.Forms.Panel();
+            this.mosaicImageBox = new System.Windows.Forms.PictureBox();
             this.menuBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
             this.originalTabPage.SuspendLayout();
+            this.originalImagePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.mosaicTabPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).BeginInit();
             this.toolBar.SuspendLayout();
+            this.mosaicImagePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).BeginInit();
             this.SuspendLayout();
             // 
             // menuBar
@@ -194,18 +200,6 @@ namespace GroupEMosaicator.View
             this.aboutMenuItem.Size = new System.Drawing.Size(149, 22);
             this.aboutMenuItem.Text = "&About";
             // 
-            // originalImageBox
-            // 
-            this.originalImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.originalImageBox.Location = new System.Drawing.Point(0, 0);
-            this.originalImageBox.Name = "originalImageBox";
-            this.originalImageBox.Size = new System.Drawing.Size(775, 488);
-            this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.originalImageBox.TabIndex = 1;
-            this.originalImageBox.TabStop = false;
-            // 
             // tabPane
             // 
             this.tabPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -221,7 +215,8 @@ namespace GroupEMosaicator.View
             // 
             // originalTabPage
             // 
-            this.originalTabPage.Controls.Add(this.originalImageBox);
+            this.originalTabPage.AutoScroll = true;
+            this.originalTabPage.Controls.Add(this.originalImagePanel);
             this.originalTabPage.Location = new System.Drawing.Point(4, 22);
             this.originalTabPage.Name = "originalTabPage";
             this.originalTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -230,9 +225,32 @@ namespace GroupEMosaicator.View
             this.originalTabPage.Text = "Original Image";
             this.originalTabPage.UseVisualStyleBackColor = true;
             // 
+            // originalImagePanel
+            // 
+            this.originalImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.originalImagePanel.AutoScroll = true;
+            this.originalImagePanel.Controls.Add(this.originalImageBox);
+            this.originalImagePanel.Location = new System.Drawing.Point(3, 3);
+            this.originalImagePanel.Name = "originalImagePanel";
+            this.originalImagePanel.Size = new System.Drawing.Size(765, 482);
+            this.originalImagePanel.TabIndex = 0;
+            // 
+            // originalImageBox
+            // 
+            this.originalImageBox.Location = new System.Drawing.Point(3, 3);
+            this.originalImageBox.Name = "originalImageBox";
+            this.originalImageBox.Size = new System.Drawing.Size(759, 476);
+            this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.originalImageBox.TabIndex = 2;
+            this.originalImageBox.TabStop = false;
+            this.originalImageBox.MouseEnter += new System.EventHandler(this.originalImageBox_MouseEnter);
+            this.originalImageBox.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.originalImageBox_MouseWheel);
+            // 
             // mosaicTabPage
             // 
-            this.mosaicTabPage.Controls.Add(this.mosaicImageBox);
+            this.mosaicTabPage.Controls.Add(this.mosaicImagePanel);
             this.mosaicTabPage.Location = new System.Drawing.Point(4, 22);
             this.mosaicTabPage.Name = "mosaicTabPage";
             this.mosaicTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -240,18 +258,6 @@ namespace GroupEMosaicator.View
             this.mosaicTabPage.TabIndex = 1;
             this.mosaicTabPage.Text = "Mosaic";
             this.mosaicTabPage.UseVisualStyleBackColor = true;
-            // 
-            // mosaicImageBox
-            // 
-            this.mosaicImageBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.mosaicImageBox.Location = new System.Drawing.Point(0, 0);
-            this.mosaicImageBox.Name = "mosaicImageBox";
-            this.mosaicImageBox.Size = new System.Drawing.Size(771, 488);
-            this.mosaicImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.mosaicImageBox.TabIndex = 0;
-            this.mosaicImageBox.TabStop = false;
             // 
             // toolBar
             // 
@@ -447,6 +453,29 @@ namespace GroupEMosaicator.View
             this.imagePalette.ImageSize = new System.Drawing.Size(16, 16);
             this.imagePalette.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // mosaicImagePanel
+            // 
+            this.mosaicImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mosaicImagePanel.AutoScroll = true;
+            this.mosaicImagePanel.Controls.Add(this.mosaicImageBox);
+            this.mosaicImagePanel.Location = new System.Drawing.Point(3, 3);
+            this.mosaicImagePanel.Name = "mosaicImagePanel";
+            this.mosaicImagePanel.Size = new System.Drawing.Size(765, 482);
+            this.mosaicImagePanel.TabIndex = 0;
+            // 
+            // mosaicImageBox
+            // 
+            this.mosaicImageBox.Location = new System.Drawing.Point(3, 3);
+            this.mosaicImageBox.Name = "mosaicImageBox";
+            this.mosaicImageBox.Size = new System.Drawing.Size(759, 476);
+            this.mosaicImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.mosaicImageBox.TabIndex = 1;
+            this.mosaicImageBox.TabStop = false;
+            this.mosaicImageBox.MouseEnter += new System.EventHandler(this.mosaicImageBox_MouseEnter);
+            this.mosaicImageBox.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.mosaicImageBox_MouseWheel);
+            // 
             // MosaicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -460,13 +489,15 @@ namespace GroupEMosaicator.View
             this.Text = "Mosaic Creator by Walker and Odom";
             this.menuBar.ResumeLayout(false);
             this.menuBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).EndInit();
             this.tabPane.ResumeLayout(false);
             this.originalTabPage.ResumeLayout(false);
+            this.originalImagePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).EndInit();
             this.mosaicTabPage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).EndInit();
             this.toolBar.ResumeLayout(false);
             this.toolBar.PerformLayout();
+            this.mosaicImagePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -483,11 +514,9 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.ToolStripMenuItem helpMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createMosaicMenuItem;
-        private System.Windows.Forms.PictureBox originalImageBox;
         private System.Windows.Forms.TabControl tabPane;
         private System.Windows.Forms.TabPage originalTabPage;
         private System.Windows.Forms.TabPage mosaicTabPage;
-        private System.Windows.Forms.PictureBox mosaicImageBox;
         private System.Windows.Forms.ToolStripMenuItem saveMenuItem;
         private System.Windows.Forms.ToolStripMenuItem solidBlockMosaicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pictureMosaicToolStripMenuItem;
@@ -515,6 +544,10 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.ImageList imagePalette;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
         private System.Windows.Forms.ToolStripButton viewPaletteButton;
+        private System.Windows.Forms.Panel originalImagePanel;
+        private System.Windows.Forms.PictureBox originalImageBox;
+        private Panel mosaicImagePanel;
+        private PictureBox mosaicImageBox;
     }
 }
 
