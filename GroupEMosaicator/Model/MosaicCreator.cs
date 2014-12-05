@@ -7,7 +7,7 @@ namespace GroupEMosaicator.Model
 {
     internal class MosaicCreator
     {
-        private List<Color> paletteColors;
+        private Image previousImage;
 
         /// <summary>
         ///     Creates the square block mosaic.
@@ -163,7 +163,8 @@ namespace GroupEMosaicator.Model
         {
             Graphics g = Graphics.FromImage(bitmap);
 
-            this.paletteColors = new List<Color>(this.averagePaletteColors(palette));
+            List<Image> images = this.copyPalette(palette);
+            List<Color> colors = this.averagePaletteColors(images);
 
             for (int y = 0; y < bitmap.Height; y += blockSize)
             {
@@ -171,9 +172,13 @@ namespace GroupEMosaicator.Model
                 {
                     var dstRect = new Rectangle(x, y, blockSize, blockSize);
                     Color averageColor = PixelFactory.GetAverageColorOfSquareBlock(dstRect, bitmap);
-                    Image bestMatchImage = this.getBestMatchPaletteImage(averageColor, palette);
-                    var srcRect = new Rectangle(0, 0, bestMatchImage.Width, bestMatchImage.Height);
-                    g.DrawImage(bestMatchImage, dstRect, srcRect, GraphicsUnit.Pixel);
+
+                    List<Image> closeMatches = this.getBestMatchPaletteImage(averageColor, images, colors);
+                    Image randomMatch = this.getRandomBestMatch(closeMatches);
+                    this.previousImage = randomMatch;
+
+                    var srcRect = new Rectangle(0, 0, randomMatch.Width, randomMatch.Height);
+                    g.DrawImage(randomMatch, dstRect, srcRect, GraphicsUnit.Pixel);
                 }
             }
             g.Dispose();
@@ -181,37 +186,74 @@ namespace GroupEMosaicator.Model
             return bitmap;
         }
 
-        private IEnumerable<Color> averagePaletteColors(ImageList.ImageCollection palette)
+        private Image getRandomBestMatch(List<Image> closeMatches)
+        {
+            var randomizer = new Random();
+
+            int index;
+
+            do
+            {
+                index = randomizer.Next(closeMatches.Count);
+            } while (closeMatches[index].Equals(this.previousImage));
+
+            return closeMatches[index];
+        }
+
+        private List<Image> copyPalette(ImageList.ImageCollection palette)
+        {
+            var images = new List<Image>(palette.Count);
+            for (int i = 0; i < palette.Count; i++)
+            {
+                images.Add(palette[i]);
+            }
+            return images;
+        }
+
+        private List<Color> averagePaletteColors(IEnumerable<Image> images)
         {
             var averageColors = new List<Color>();
 
-            for (int i = 0; i < palette.Count; i++)
+            foreach (Image image in images)
             {
-                var srcRect = new Rectangle(0, 0, palette[i].Width, palette[i].Height);
-                Color currentAverage = PixelFactory.GetAverageColorOfSquareBlock(srcRect, (Bitmap) palette[i]);
+                var srcRect = new Rectangle(0, 0, image.Width, image.Height);
+                Color currentAverage = PixelFactory.GetAverageColorOfSquareBlock(srcRect, (Bitmap) image);
                 averageColors.Add(currentAverage);
             }
 
             return averageColors;
         }
 
-        private Image getBestMatchPaletteImage(Color averageColor, ImageList.ImageCollection palette)
+        private List<Image> getBestMatchPaletteImage(Color averageColor, IEnumerable<Image> images,
+            IEnumerable<Color> colors)
         {
-            double smallestDifference = Double.MaxValue;
-            int bestMatchIndex = 0;
+            const int maxNumberOfCloseMatches = 5;
 
-            foreach (Color currentColor in this.paletteColors)
+            var imagesCopy = new List<Image>(images);
+            var colorsCopy = new List<Color>(colors);
+
+            var closeMatches = new List<Image>(maxNumberOfCloseMatches);
+
+            while (closeMatches.Count < maxNumberOfCloseMatches && imagesCopy.Count > 0)
             {
-                double colorDifference = this.calculateColorDifference(averageColor, currentColor);
+                double smallestDifference = Double.MaxValue;
+                int bestMatchIndex = 0;
 
-                if (colorDifference < smallestDifference)
+                foreach (Color currentColor in colorsCopy)
                 {
-                    smallestDifference = colorDifference;
-                    bestMatchIndex = this.paletteColors.IndexOf(currentColor);
-                }
-            }
+                    double colorDifference = this.calculateColorDifference(averageColor, currentColor);
 
-            return palette[bestMatchIndex];
+                    if (colorDifference < smallestDifference)
+                    {
+                        smallestDifference = colorDifference;
+                        bestMatchIndex = colorsCopy.IndexOf(currentColor);
+                    }
+                }
+                closeMatches.Add(imagesCopy[bestMatchIndex]);
+                imagesCopy.RemoveAt(bestMatchIndex);
+                colorsCopy.RemoveAt(bestMatchIndex);
+            }
+            return closeMatches;
         }
 
         private double calculateColorDifference(Color averageColor, Color paletteColor)

@@ -65,6 +65,7 @@ namespace GroupEMosaicator.View
                 this.originalImageBox.Image = (Image) this.originalImage.Clone();
                 this.enableBlockMosaicControls();
                 this.enablePictureMosaicControls();
+                this.mosaicImageBox.Image = null;
             }
         }
 
@@ -301,11 +302,11 @@ namespace GroupEMosaicator.View
             this.squareBlocksToolStripMenuItem_Click(sender, e);
         }
 
-
         private void lowerLeftToUpperRightTriangleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mosaicImageBox.Image = this.mosaicManager.CreateLowerLeftToUpperRightTriangleBlockMosaic(this.BlockSizeTextBox,
-                this.originalImageBox.Image);
+            this.mosaicImageBox.Image =
+                this.mosaicManager.CreateLowerLeftToUpperRightTriangleBlockMosaic(this.BlockSizeTextBox,
+                    this.originalImageBox.Image);
 
             if (this.mosaicImageBox.Image != null)
             {
