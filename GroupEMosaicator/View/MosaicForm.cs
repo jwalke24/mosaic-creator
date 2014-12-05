@@ -296,9 +296,15 @@ namespace GroupEMosaicator.View
             this.enablePictureMosaicControls();
         }
 
-        private void triangleBlocksToolStripMenuItem_Click(object sender, EventArgs e)
+        private void squareBlockMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mosaicImageBox.Image = this.mosaicManager.CreateTriangleBlockMosaic(this.BlockSizeTextBox,
+            this.squareBlocksToolStripMenuItem_Click(sender, e);
+        }
+
+
+        private void lowerLeftToUpperRightTriangleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.mosaicImageBox.Image = this.mosaicManager.CreateLowerLeftToUpperRightTriangleBlockMosaic(this.BlockSizeTextBox,
                 this.originalImageBox.Image);
 
             if (this.mosaicImageBox.Image != null)
@@ -306,6 +312,28 @@ namespace GroupEMosaicator.View
                 this.enableSavingControls();
                 this.solidBlockMosaicToolStripMenuItem.Enabled = false;
             }
+        }
+
+        private void upperLeftToLowerRightTriangleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.mosaicImageBox.Image = this.mosaicManager.CreateUpperLeftToLowerRightTriangle(this.BlockSizeTextBox,
+                this.originalImageBox.Image);
+
+            if (this.mosaicImageBox.Image != null)
+            {
+                this.enableSavingControls();
+                this.solidBlockMosaicToolStripMenuItem.Enabled = false;
+            }
+        }
+
+        private void upperLeftToLowerRightTriangleToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.upperLeftToLowerRightTriangleToolStripMenuItem_Click(sender, e);
+        }
+
+        private void lowerLeftToUpperRightTriangleToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem_Click(sender, e);
         }
     }
 }

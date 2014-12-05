@@ -39,10 +39,16 @@ namespace GroupEMosaicator.Controller
         /// <returns>
         ///     A triangle-block mosaic image.
         /// </returns>
-        public Image CreateTriangleBlockMosaic(int blockSize, Image image)
+        public Image CreateLowerLeftToUpperRightTriangleBlockMosaic(int blockSize, Image image)
         {
             var bitmap = new Bitmap(image);
-            return this.creator.CreateTriangleBlockMosaic(blockSize, bitmap);
+            return this.creator.CreateLowerLeftToUpperRightTriangleBlockMosaic(blockSize, bitmap);
+        }
+
+        public Image CreateUpperLeftToLowerRightTriangle(int blockSize, Image image)
+        {
+            var bitmap = new Bitmap(image);
+            return this.creator.CreateUpperRightToLowerLeftTriangleBlockMosaic(blockSize, bitmap);
         }
 
         /// <summary>

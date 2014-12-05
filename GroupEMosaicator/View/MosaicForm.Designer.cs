@@ -43,6 +43,10 @@ namespace GroupEMosaicator.View
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.createMosaicMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.solidBlockMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.squareBlockMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.triangleBlockMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.upperLeftToLowerRightTriangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,6 +74,8 @@ namespace GroupEMosaicator.View
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.createBlockMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triangleBlocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.upperLeftToLowerRightTriangleToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.squareBlocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createPictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
@@ -163,17 +169,50 @@ namespace GroupEMosaicator.View
             // 
             // solidBlockMosaicToolStripMenuItem
             // 
+            this.solidBlockMosaicToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.squareBlockMosaicToolStripMenuItem,
+            this.triangleBlockMosaicToolStripMenuItem});
             this.solidBlockMosaicToolStripMenuItem.Enabled = false;
             this.solidBlockMosaicToolStripMenuItem.Name = "solidBlockMosaicToolStripMenuItem";
-            this.solidBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.solidBlockMosaicToolStripMenuItem.Text = "Solid &Block Mosaic";
+            this.solidBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.solidBlockMosaicToolStripMenuItem.Text = "Block Mosaic";
             this.solidBlockMosaicToolStripMenuItem.Click += new System.EventHandler(this.solidBlockMosaicToolStripMenuItem_Click);
+            // 
+            // squareBlockMosaicToolStripMenuItem
+            // 
+            this.squareBlockMosaicToolStripMenuItem.Name = "squareBlockMosaicToolStripMenuItem";
+            this.squareBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.squareBlockMosaicToolStripMenuItem.Text = "Square Block Mosaic";
+            this.squareBlockMosaicToolStripMenuItem.Click += new System.EventHandler(this.squareBlockMosaicToolStripMenuItem_Click);
+            // 
+            // triangleBlockMosaicToolStripMenuItem
+            // 
+            this.triangleBlockMosaicToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem,
+            this.upperLeftToLowerRightTriangleToolStripMenuItem});
+            this.triangleBlockMosaicToolStripMenuItem.Name = "triangleBlockMosaicToolStripMenuItem";
+            this.triangleBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.triangleBlockMosaicToolStripMenuItem.Text = "Triangle Block Mosaic";
+            // 
+            // lowerLeftToUpperRightTriangleToolStripMenuItem
+            // 
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem.Name = "lowerLeftToUpperRightTriangleToolStripMenuItem";
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem.Text = "Lower Left to Upper Right Triangle";
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem.Click += new System.EventHandler(this.lowerLeftToUpperRightTriangleToolStripMenuItem_Click);
+            // 
+            // upperLeftToLowerRightTriangleToolStripMenuItem
+            // 
+            this.upperLeftToLowerRightTriangleToolStripMenuItem.Name = "upperLeftToLowerRightTriangleToolStripMenuItem";
+            this.upperLeftToLowerRightTriangleToolStripMenuItem.Size = new System.Drawing.Size(255, 22);
+            this.upperLeftToLowerRightTriangleToolStripMenuItem.Text = "Upper Left to Lower Right Triangle";
+            this.upperLeftToLowerRightTriangleToolStripMenuItem.Click += new System.EventHandler(this.upperLeftToLowerRightTriangleToolStripMenuItem_Click);
             // 
             // pictureMosaicToolStripMenuItem
             // 
             this.pictureMosaicToolStripMenuItem.Enabled = false;
             this.pictureMosaicToolStripMenuItem.Name = "pictureMosaicToolStripMenuItem";
-            this.pictureMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.pictureMosaicToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.pictureMosaicToolStripMenuItem.Text = "&Picture Mosaic";
             this.pictureMosaicToolStripMenuItem.Click += new System.EventHandler(this.pictureMosaicToolStripMenuItem_Click);
             // 
@@ -424,10 +463,26 @@ namespace GroupEMosaicator.View
             // 
             // triangleBlocksToolStripMenuItem
             // 
+            this.triangleBlocksToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem1,
+            this.upperLeftToLowerRightTriangleToolStripMenuItem1});
             this.triangleBlocksToolStripMenuItem.Name = "triangleBlocksToolStripMenuItem";
             this.triangleBlocksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.triangleBlocksToolStripMenuItem.Text = "Triangle Blocks";
-            this.triangleBlocksToolStripMenuItem.Click += new System.EventHandler(this.triangleBlocksToolStripMenuItem_Click);
+            // 
+            // lowerLeftToUpperRightTriangleToolStripMenuItem1
+            // 
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem1.Name = "lowerLeftToUpperRightTriangleToolStripMenuItem1";
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem1.Size = new System.Drawing.Size(255, 22);
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem1.Text = "Lower Left to Upper Right Triangle";
+            this.lowerLeftToUpperRightTriangleToolStripMenuItem1.Click += new System.EventHandler(this.lowerLeftToUpperRightTriangleToolStripMenuItem1_Click);
+            // 
+            // upperLeftToLowerRightTriangleToolStripMenuItem1
+            // 
+            this.upperLeftToLowerRightTriangleToolStripMenuItem1.Name = "upperLeftToLowerRightTriangleToolStripMenuItem1";
+            this.upperLeftToLowerRightTriangleToolStripMenuItem1.Size = new System.Drawing.Size(255, 22);
+            this.upperLeftToLowerRightTriangleToolStripMenuItem1.Text = "Upper Left to Lower Right Triangle";
+            this.upperLeftToLowerRightTriangleToolStripMenuItem1.Click += new System.EventHandler(this.upperLeftToLowerRightTriangleToolStripMenuItem1_Click);
             // 
             // squareBlocksToolStripMenuItem
             // 
@@ -550,6 +605,12 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.PictureBox originalImageBox;
         private Panel mosaicImagePanel;
         private PictureBox mosaicImageBox;
+        private ToolStripMenuItem squareBlockMosaicToolStripMenuItem;
+        private ToolStripMenuItem triangleBlockMosaicToolStripMenuItem;
+        private ToolStripMenuItem lowerLeftToUpperRightTriangleToolStripMenuItem;
+        private ToolStripMenuItem upperLeftToLowerRightTriangleToolStripMenuItem;
+        private ToolStripMenuItem lowerLeftToUpperRightTriangleToolStripMenuItem1;
+        private ToolStripMenuItem upperLeftToLowerRightTriangleToolStripMenuItem1;
     }
 }
 

@@ -44,7 +44,7 @@ namespace GroupEMosaicator.Model
         /// <param name="blockSize">Size of the block.</param>
         /// <param name="image">The image.</param>
         /// <returns></returns>
-        public Image CreateTriangleBlockMosaic(int blockSize, Bitmap image)
+        public Image CreateLowerLeftToUpperRightTriangleBlockMosaic(int blockSize, Bitmap image)
         {
             if (blockSize <= 0)
             {
@@ -60,21 +60,51 @@ namespace GroupEMosaicator.Model
                 {
                     var averagingArea = new Rectangle(row, column, blockSize, blockSize);
 
-                    Color averageTopColor = PixelFactory.GetAverageColorOfTopTriangle(averagingArea, image);
+                    Color averageTopColor = PixelFactory.GetAverageColorOfTopLeftTriangle(averagingArea, image);
                     var averageTopBrush = new SolidBrush(averageTopColor);
-                    Point[] topPoints = this.getTopTrianglePoints(blockSize, row, column);
+                    Point[] topPoints = this.getTopLeftTrianglePoints(blockSize, row, column);
                     graphics.FillPolygon(averageTopBrush, topPoints);
 
-                    Color averageBottomColor = PixelFactory.GetAverageColorOfBottomTriangle(averagingArea, image);
+                    Color averageBottomColor = PixelFactory.GetAverageColorOfBottomRightTriangle(averagingArea, image);
                     var averageBottomBrush = new SolidBrush(averageBottomColor);
-                    Point[] botPoints = this.getBottomTriangePoints(blockSize, row, column);
+                    Point[] botPoints = this.getBottomRightTriangePoints(blockSize, row, column);
                     graphics.FillPolygon(averageBottomBrush, botPoints);
                 }
             }
             return newBitmap;
         }
 
-        private Point[] getTopTrianglePoints(int blockSize, int row, int column)
+        public Image CreateUpperRightToLowerLeftTriangleBlockMosaic(int blockSize, Bitmap image)
+        {
+            if (blockSize <= 0)
+            {
+                return null;
+            }
+
+            var newBitmap = new Bitmap(image);
+            Graphics graphics = Graphics.FromImage(newBitmap);
+
+            for (int column = 0; column < image.Height; column += blockSize)
+            {
+                for (int row = 0; row < image.Width; row += blockSize)
+                {
+                    var averagingArea = new Rectangle(row, column, blockSize, blockSize);
+
+                    Color averageTopColor = PixelFactory.GetAverageColorOfTopRightTriangle(averagingArea, image);
+                    var averageTopBrush = new SolidBrush(averageTopColor);
+                    Point[] topPoints = this.getTopRightTrianglePoints(blockSize, row, column);
+                    graphics.FillPolygon(averageTopBrush, topPoints);
+
+                    Color averageBottomColor = PixelFactory.GetAverageColorOfBottomLeftTriangle(averagingArea, image);
+                    var averageBottomBrush = new SolidBrush(averageBottomColor);
+                    Point[] botPoints = this.getBottomLeftTrianglePoints(blockSize, row, column);
+                    graphics.FillPolygon(averageBottomBrush, botPoints);
+                }
+            }
+            return newBitmap;
+        }
+
+        private Point[] getTopLeftTrianglePoints(int blockSize, int row, int column)
         {
             var topPoints = new Point[3];
             topPoints[0].X = row;
@@ -86,7 +116,7 @@ namespace GroupEMosaicator.Model
             return topPoints;
         }
 
-        private Point[] getBottomTriangePoints(int blockSize, int row, int column)
+        private Point[] getBottomRightTriangePoints(int blockSize, int row, int column)
         {
             var botPoints = new Point[3];
             botPoints[0].X = row + blockSize;
@@ -96,6 +126,30 @@ namespace GroupEMosaicator.Model
             botPoints[2].X = row;
             botPoints[2].Y = column + blockSize;
             return botPoints;
+        }
+
+        private Point[] getTopRightTrianglePoints(int blockSize, int row, int column)
+        {
+            var topPoints = new Point[3];
+            topPoints[0].X = row;
+            topPoints[0].Y = column;
+            topPoints[1].X = row + blockSize;
+            topPoints[1].Y = column;
+            topPoints[2].X = row + blockSize;
+            topPoints[2].Y = column + blockSize;
+            return topPoints;
+        }
+
+        private Point[] getBottomLeftTrianglePoints(int blockSize, int row, int column)
+        {
+            var topPoints = new Point[3];
+            topPoints[0].X = row;
+            topPoints[0].Y = column;
+            topPoints[1].X = row;
+            topPoints[1].Y = column + blockSize;
+            topPoints[2].X = row + blockSize;
+            topPoints[2].Y = column + blockSize;
+            return topPoints;
         }
 
         /// <summary>
@@ -162,7 +216,6 @@ namespace GroupEMosaicator.Model
 
         private double calculateColorDifference(Color averageColor, Color paletteColor)
         {
-            
             long redDifference = averageColor.R - paletteColor.R;
             long greenDifference = averageColor.G - paletteColor.G;
             long blueDifference = averageColor.B - paletteColor.B;
