@@ -25,7 +25,7 @@ namespace GroupEMosaicator.Model
                 for (int row = 0; row < image.Width; row += blockSize)
                 {
                     var averagingArea = new Rectangle(row, column, blockSize, blockSize);
-                    Color averageColor = PixelFactory.GetAverageColor(averagingArea, image);
+                    Color averageColor = PixelFactory.GetAverageColorOfSquareBlock(averagingArea, image);
                     var averageBrush = new SolidBrush(averageColor);
                     graphics.FillRectangle(averageBrush, row, column, blockSize, blockSize);
                 }
@@ -54,9 +54,32 @@ namespace GroupEMosaicator.Model
                 for (int row = 0; row < image.Width; row += blockSize)
                 {
                     var averagingArea = new Rectangle(row, column, blockSize, blockSize);
-                    Color averageColor = PixelFactory.GetAverageColor(averagingArea, image);
-                    var averageBrush = new SolidBrush(averageColor);
-                    graphics.FillRectangle(averageBrush, row, column, blockSize, blockSize);
+                    
+                    Color averageTopColor = PixelFactory.GetAverageColorOfTopTriangle(averagingArea, image);
+                    var averageTopBrush = new SolidBrush(averageTopColor);
+
+                    var topPoints = new Point[3];
+                    topPoints[0].X = row;
+                    topPoints[0].Y = column;
+                    topPoints[1].X = row + blockSize;
+                    topPoints[1].Y = column;
+                    topPoints[2].X = row;
+                    topPoints[2].Y = column + blockSize;
+
+                    graphics.FillPolygon(averageTopBrush, topPoints);
+
+                    Color averageBottomColor = PixelFactory.GetAverageColorOfBottomTriangle(averagingArea, image);
+                    var averageBottomBrush = new SolidBrush(averageBottomColor);
+
+                    var botPoints = new Point[3];
+                    botPoints[0].X = row + blockSize;
+                    botPoints[0].Y = column + blockSize;
+                    botPoints[1].X = row + blockSize;
+                    botPoints[1].Y = column;
+                    botPoints[2].X = row;
+                    botPoints[2].Y = column + blockSize;
+
+                    graphics.FillPolygon(averageBottomBrush, botPoints);
                 }
             }
             return newBitmap;

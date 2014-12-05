@@ -68,7 +68,7 @@ namespace GroupEMosaicator.View
             if (this.mosaicImageBox.Image != null)
             {
                 FileIo.SaveFile(this.mosaicImageBox.Image);
-        }
+            }
 
         }
 
@@ -194,6 +194,22 @@ namespace GroupEMosaicator.View
             {
                 this.enableSavingControls();
             }
+        }
+
+        private void triangleBlocksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.mosaicImageBox.Image = this.blockManager.CreateTriangleBlockMosaic(this.BlockSizeTextBox,
+                (Bitmap)this.originalImage);
+
+            if (this.mosaicImageBox.Image != null)
+            {
+                this.enableSavingControls();
+            }
+        }
+
+        private void fileMenu_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

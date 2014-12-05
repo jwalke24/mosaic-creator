@@ -34,6 +34,7 @@ namespace GroupEMosaicator.View
             this.menuBar = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.openMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -63,10 +64,9 @@ namespace GroupEMosaicator.View
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSplitButton();
             this.createBlockMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createPictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.triangleBlocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.squareBlocksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFolderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createPictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.imagePaletteLabel = new System.Windows.Forms.ToolStripLabel();
             this.menuBar.SuspendLayout();
@@ -99,28 +99,38 @@ namespace GroupEMosaicator.View
             this.exitMenuItem});
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.Size = new System.Drawing.Size(37, 20);
-            this.fileMenu.Text = "File";
+            this.fileMenu.Text = "&File";
+            this.fileMenu.Click += new System.EventHandler(this.fileMenu_Click);
             // 
             // openMenuItem
             // 
             this.openMenuItem.Name = "openMenuItem";
+            this.openMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openMenuItem.Text = "Open";
+            this.openMenuItem.Text = "&Open";
             this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
+            // 
+            // openFolderToolStripMenuItem
+            // 
+            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openFolderToolStripMenuItem.Text = "Open &Folder";
+            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
             // saveMenuItem
             // 
             this.saveMenuItem.Enabled = false;
             this.saveMenuItem.Name = "saveMenuItem";
+            this.saveMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.saveMenuItem.Text = "Save";
+            this.saveMenuItem.Text = "&Save";
             this.saveMenuItem.Click += new System.EventHandler(this.saveMenuItem_Click);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
             this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitMenuItem.Text = "Exit";
+            this.exitMenuItem.Text = "&Exit";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
             // editMenu
@@ -168,7 +178,8 @@ namespace GroupEMosaicator.View
             // helpMenuItem
             // 
             this.helpMenuItem.Name = "helpMenuItem";
-            this.helpMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.helpMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.helpMenuItem.Size = new System.Drawing.Size(152, 22);
             this.helpMenuItem.Text = "Help";
             // 
             // aboutMenuItem
@@ -297,7 +308,7 @@ namespace GroupEMosaicator.View
             this.squareGridToolStripMenuItem,
             this.traingleGridToolStripMenuItem});
             this.addGridToolStripMenuItem.Name = "addGridToolStripMenuItem";
-            this.addGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.addGridToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.addGridToolStripMenuItem.Text = "Add Grid";
             // 
             // squareGridToolStripMenuItem
@@ -317,7 +328,7 @@ namespace GroupEMosaicator.View
             // removeGridToolStripMenuItem
             // 
             this.removeGridToolStripMenuItem.Name = "removeGridToolStripMenuItem";
-            this.removeGridToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.removeGridToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.removeGridToolStripMenuItem.Text = "Remove Grid";
             this.removeGridToolStripMenuItem.Click += new System.EventHandler(this.removeGridToolStripMenuItem_Click);
             // 
@@ -362,6 +373,20 @@ namespace GroupEMosaicator.View
             this.createBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.createBlockMosaicToolStripMenuItem.Text = "Create Block Mosaic";
             // 
+            // triangleBlocksToolStripMenuItem
+            // 
+            this.triangleBlocksToolStripMenuItem.Name = "triangleBlocksToolStripMenuItem";
+            this.triangleBlocksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.triangleBlocksToolStripMenuItem.Text = "Triangle Blocks";
+            this.triangleBlocksToolStripMenuItem.Click += new System.EventHandler(this.triangleBlocksToolStripMenuItem_Click);
+            // 
+            // squareBlocksToolStripMenuItem
+            // 
+            this.squareBlocksToolStripMenuItem.Name = "squareBlocksToolStripMenuItem";
+            this.squareBlocksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.squareBlocksToolStripMenuItem.Text = "Square Blocks";
+            this.squareBlocksToolStripMenuItem.Click += new System.EventHandler(this.squareBlocksToolStripMenuItem_Click);
+            // 
             // createPictureMosaicToolStripMenuItem
             // 
             this.createPictureMosaicToolStripMenuItem.Enabled = false;
@@ -369,13 +394,6 @@ namespace GroupEMosaicator.View
             this.createPictureMosaicToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
             this.createPictureMosaicToolStripMenuItem.Text = "Create Picture Mosaic";
             this.createPictureMosaicToolStripMenuItem.Click += new System.EventHandler(this.createPictureMosaicToolStripMenuItem_Click);
-            // 
-            // openFolderToolStripMenuItem
-            // 
-            this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openFolderToolStripMenuItem.Text = "Open Folder";
-            this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -387,19 +405,6 @@ namespace GroupEMosaicator.View
             this.imagePaletteLabel.Name = "imagePaletteLabel";
             this.imagePaletteLabel.Size = new System.Drawing.Size(106, 22);
             this.imagePaletteLabel.Text = "0 images in palette";
-            //
-            // triangleBlocksToolStripMenuItem
-            // 
-            this.triangleBlocksToolStripMenuItem.Name = "triangleBlocksToolStripMenuItem";
-            this.triangleBlocksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.triangleBlocksToolStripMenuItem.Text = "Triangle Blocks";
-            // 
-            // squareBlocksToolStripMenuItem
-            // 
-            this.squareBlocksToolStripMenuItem.Name = "squareBlocksToolStripMenuItem";
-            this.squareBlocksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
-            this.squareBlocksToolStripMenuItem.Text = "Square Blocks";
-            this.squareBlocksToolStripMenuItem.Click += new System.EventHandler(this.squareBlocksToolStripMenuItem_Click);
             // 
             // MosaicForm
             // 
