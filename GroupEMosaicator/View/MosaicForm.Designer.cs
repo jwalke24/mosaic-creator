@@ -376,7 +376,6 @@ namespace GroupEMosaicator.View
             // 
             // toolStripGridButton
             // 
-            this.toolStripGridButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripGridButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addGridToolStripMenuItem,
             this.removeGridToolStripMenuItem});
@@ -384,7 +383,7 @@ namespace GroupEMosaicator.View
             this.toolStripGridButton.Image = ((System.Drawing.Image)(resources.GetObject("toolStripGridButton.Image")));
             this.toolStripGridButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripGridButton.Name = "toolStripGridButton";
-            this.toolStripGridButton.Size = new System.Drawing.Size(54, 22);
+            this.toolStripGridButton.Size = new System.Drawing.Size(70, 22);
             this.toolStripGridButton.Text = "Grid...";
             this.toolStripGridButton.ToolTipText = "Display a grid for the current block size.";
             // 
