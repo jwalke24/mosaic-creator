@@ -334,9 +334,9 @@ namespace GroupEMosaicator.View
             this.toolStripSeparator3,
             this.toolStripSplitButton1,
             this.toolStripSeparator5,
+            this.viewPaletteButton,
             this.imagePaletteLabel,
-            this.toolStripSeparator6,
-            this.viewPaletteButton});
+            this.toolStripSeparator6});
             this.toolBar.Location = new System.Drawing.Point(0, 24);
             this.toolBar.Name = "toolBar";
             this.toolBar.Size = new System.Drawing.Size(777, 25);
@@ -439,14 +439,13 @@ namespace GroupEMosaicator.View
             // 
             // toolStripSplitButton1
             // 
-            this.toolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.toolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.createBlockMosaicToolStripMenuItem,
             this.createPictureMosaicToolStripMenuItem});
             this.toolStripSplitButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripSplitButton1.Image")));
             this.toolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(107, 22);
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(123, 22);
             this.toolStripSplitButton1.Text = "Create Mosaic...";
             this.toolStripSplitButton1.ToolTipText = "Create a mosaic.";
             // 
@@ -468,6 +467,7 @@ namespace GroupEMosaicator.View
             this.triangleBlocksToolStripMenuItem.Name = "triangleBlocksToolStripMenuItem";
             this.triangleBlocksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.triangleBlocksToolStripMenuItem.Text = "Triangle Blocks";
+            this.triangleBlocksToolStripMenuItem.ToolTipText = "Create a Triangle Mosaic";
             // 
             // lowerLeftToUpperRightTriangleToolStripMenuItem1
             // 
@@ -488,6 +488,7 @@ namespace GroupEMosaicator.View
             this.squareBlocksToolStripMenuItem.Name = "squareBlocksToolStripMenuItem";
             this.squareBlocksToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
             this.squareBlocksToolStripMenuItem.Text = "Square Blocks";
+            this.squareBlocksToolStripMenuItem.ToolTipText = "Create a Square Mosaic";
             this.squareBlocksToolStripMenuItem.Click += new System.EventHandler(this.squareBlocksToolStripMenuItem_Click);
             // 
             // createPictureMosaicToolStripMenuItem
@@ -516,12 +517,11 @@ namespace GroupEMosaicator.View
             // 
             // viewPaletteButton
             // 
-            this.viewPaletteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.viewPaletteButton.Enabled = false;
             this.viewPaletteButton.Image = ((System.Drawing.Image)(resources.GetObject("viewPaletteButton.Image")));
             this.viewPaletteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.viewPaletteButton.Name = "viewPaletteButton";
-            this.viewPaletteButton.Size = new System.Drawing.Size(75, 22);
+            this.viewPaletteButton.Size = new System.Drawing.Size(91, 22);
             this.viewPaletteButton.Text = "View Palette";
             this.viewPaletteButton.ToolTipText = "View the images in the palette.";
             this.viewPaletteButton.Click += new System.EventHandler(this.viewPaletteButton_Click);
