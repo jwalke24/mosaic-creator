@@ -1,26 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using GroupEMosaicator.Controller;
 using GroupEMosaicator.IO;
-using GroupEMosaicator.Model;
 using GroupEMosaicator.View.Overlays;
 
 namespace GroupEMosaicator.View
 {
+    /// <summary>
+    ///     This class represents the main form of the GUI.
+    /// </summary>
     public partial class MosaicForm : Form
     {
-        private readonly MosaicCreator blockManager;
+        private const double ZoomFactor = 1.10;
+        private const int ZoomMinMax = 10;
+
+        private readonly MosaicController mosaicManager;
         private Image originalImage;
 
+        /// <summary>
+        ///     Initializes a new instance of the <see cref="MosaicForm" /> class.
+        /// </summary>
         public MosaicForm()
         {
             this.InitializeComponent();
-            this.blockManager = new MosaicCreator();
+            this.mosaicManager = new MosaicController();
+            this.imagePalette = new ImageList();
         }
 
-        public List<Image> ImagePalette { get; private set; }
-
+        /// <summary>
+        ///     Gets the block size from its respective text box after checking input validity.
+        /// </summary>
+        /// <value>
+        ///     The valid block size.
+        /// </value>
         public int BlockSizeTextBox
         {
             get
@@ -53,7 +66,7 @@ namespace GroupEMosaicator.View
                 this.enableBlockMosaicControls();
                 this.enablePictureMosaicControls();
             }
-            }
+        }
 
         private void enableBlockMosaicControls()
         {
@@ -69,7 +82,6 @@ namespace GroupEMosaicator.View
             {
                 FileIo.SaveFile(this.mosaicImageBox.Image);
             }
-
         }
 
         private void exitMenuItem_Click(object sender, EventArgs e)
@@ -144,20 +156,27 @@ namespace GroupEMosaicator.View
 
         private void createPictureMosaicToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.ImagePalette.Capacity != 0)
+            this.mosaicImageBox.Image = this.mosaicManager.CreatePictureMosaic(this.BlockSizeTextBox,
+                (Image) this.originalImage.Clone(), this.imagePalette.Images);
+
+            if (this.mosaicImageBox.Image != null)
             {
                 this.enableSavingControls();
+                this.pictureMosaicToolStripMenuItem.Enabled = false;
+                this.createPictureMosaicToolStripMenuItem.Enabled = false;
             }
         }
 
         private void openFolderToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.ImagePalette = FileIo.ReadImagesFromFolder();
+            this.imagePalette.Images.Clear();
+            this.imagePalette.Images.AddRange(FileIo.ReadImagesFromFolder().ToArray());
+            this.imagePaletteLabel.Text = this.imagePalette.Images.Count + @" images in palette";
+            this.enablePictureMosaicControls();
 
-            if (this.ImagePalette.Capacity != 0)
+            if (this.imagePalette.Images.Count > 0)
             {
-                this.imagePaletteLabel.Text = this.ImagePalette.Capacity + @" images in palette";
-                this.enablePictureMosaicControls();
+                this.viewPaletteButton.Enabled = true;
             }
         }
 
@@ -172,7 +191,7 @@ namespace GroupEMosaicator.View
 
         private bool pictureMosaicCanBeCreated()
         {
-            return (this.originalImageBox.Image != null) && (this.ImagePalette != null) && (this.ImagePalette.Capacity != 0);
+            return (this.originalImageBox.Image != null) && (this.imagePalette.Images.Count > 0);
         }
 
         private void solidBlockMosaicToolStripMenuItem_Click(object sender, EventArgs e)
@@ -187,29 +206,106 @@ namespace GroupEMosaicator.View
 
         private void squareBlocksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mosaicImageBox.Image = this.blockManager.CreateSquareBlockMosaic(this.BlockSizeTextBox,
-                (Bitmap)this.originalImage);
+            this.mosaicImageBox.Image = this.mosaicManager.CreateSquareBlockMosaic(this.BlockSizeTextBox,
+                this.originalImageBox.Image);
 
             if (this.mosaicImageBox.Image != null)
             {
                 this.enableSavingControls();
+                this.solidBlockMosaicToolStripMenuItem.Enabled = false;
             }
+        }
+
+        private void viewPaletteButton_Click(object sender, EventArgs e)
+        {
+            var paletteForm = new PaletteForm(this.imagePalette) {Owner = this};
+            paletteForm.ShowDialog();
+        }
+
+        private void originalImageBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (this.originalImageBox.Image == null)
+            {
+                return;
+            }
+
+            if (e.Delta > 0)
+            {
+                this.zoomIn(this.originalImageBox, this.originalImagePanel);
+            }
+            else
+            {
+                this.zoomOut(this.originalImageBox, this.originalImagePanel);
+            }
+        }
+
+        private void zoomOut(PictureBox pictureBox, Panel panel)
+        {
+            if ((pictureBox.Width > (panel.Width/ZoomMinMax)) && (pictureBox.Height > (panel.Height/ZoomMinMax)))
+            {
+                pictureBox.Width = Convert.ToInt32(pictureBox.Width/ZoomFactor);
+                pictureBox.Height = Convert.ToInt32(pictureBox.Height/ZoomFactor);
+            }
+        }
+
+        private void zoomIn(PictureBox pictureBox, Panel panel)
+        {
+            if ((pictureBox.Width < (ZoomMinMax*panel.Width)) && (pictureBox.Height < (ZoomMinMax*panel.Height)))
+            {
+                pictureBox.Width = Convert.ToInt32(pictureBox.Width*ZoomFactor);
+                pictureBox.Height = Convert.ToInt32(pictureBox.Height*ZoomFactor);
+            }
+        }
+
+        private void originalImageBox_MouseEnter(object sender, EventArgs e)
+        {
+            if (this.originalImageBox.Focused == false)
+            {
+                this.originalImageBox.Focus();
+            }
+        }
+
+        private void mosaicImageBox_MouseEnter(object sender, EventArgs e)
+        {
+            if (this.mosaicImageBox.Focused == false)
+            {
+                this.mosaicImageBox.Focus();
+            }
+        }
+
+        private void mosaicImageBox_MouseWheel(object sender, MouseEventArgs e)
+        {
+            if (this.mosaicImageBox.Image == null)
+            {
+                return;
+            }
+
+            if (e.Delta > 0)
+            {
+                this.zoomIn(this.mosaicImageBox, this.mosaicImagePanel);
+            }
+            else
+            {
+                this.zoomOut(this.mosaicImageBox, this.mosaicImagePanel);
+            }
+        }
+
+        private void blockSizeTextBox_TextChanged(object sender, EventArgs e)
+        {
+            this.enableBlockMosaicControls();
+            this.enablePictureMosaicControls();
         }
 
         private void triangleBlocksToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.mosaicImageBox.Image = this.blockManager.CreateTriangleBlockMosaic(this.BlockSizeTextBox,
-                (Bitmap)this.originalImage);
+            this.mosaicImageBox.Image = this.mosaicManager.CreateTriangleBlockMosaic(this.BlockSizeTextBox,
+                this.originalImageBox.Image);
 
             if (this.mosaicImageBox.Image != null)
             {
                 this.enableSavingControls();
+                this.solidBlockMosaicToolStripMenuItem.Enabled = false;
             }
-        }
-
-        private void fileMenu_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

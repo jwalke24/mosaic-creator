@@ -1,4 +1,6 @@
-﻿using System.Security.AccessControl;
+﻿using System;
+using System.Security.AccessControl;
+using System.Windows.Forms;
 
 namespace GroupEMosaicator.View
 {
@@ -30,6 +32,7 @@ namespace GroupEMosaicator.View
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MosaicForm));
             this.menuBar = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,12 +47,14 @@ namespace GroupEMosaicator.View
             this.helpMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.helpMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.originalImageBox = new System.Windows.Forms.PictureBox();
             this.tabPane = new System.Windows.Forms.TabControl();
             this.originalTabPage = new System.Windows.Forms.TabPage();
+            this.originalImagePanel = new System.Windows.Forms.Panel();
+            this.originalImageBox = new System.Windows.Forms.PictureBox();
             this.mosaicTabPage = new System.Windows.Forms.TabPage();
+            this.mosaicImagePanel = new System.Windows.Forms.Panel();
             this.mosaicImageBox = new System.Windows.Forms.PictureBox();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolBar = new System.Windows.Forms.ToolStrip();
             this.openButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.saveButton = new System.Windows.Forms.ToolStripButton();
@@ -69,13 +74,18 @@ namespace GroupEMosaicator.View
             this.createPictureMosaicToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.imagePaletteLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.viewPaletteButton = new System.Windows.Forms.ToolStripButton();
+            this.imagePalette = new System.Windows.Forms.ImageList(this.components);
             this.menuBar.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.tabPane.SuspendLayout();
             this.originalTabPage.SuspendLayout();
+            this.originalImagePanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).BeginInit();
             this.mosaicTabPage.SuspendLayout();
+            this.mosaicImagePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).BeginInit();
-            this.toolStrip1.SuspendLayout();
+            this.toolBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuBar
@@ -100,21 +110,21 @@ namespace GroupEMosaicator.View
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.Size = new System.Drawing.Size(37, 20);
             this.fileMenu.Text = "&File";
-            this.fileMenu.Click += new System.EventHandler(this.fileMenu_Click);
             // 
             // openMenuItem
             // 
             this.openMenuItem.Name = "openMenuItem";
             this.openMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openMenuItem.Size = new System.Drawing.Size(183, 22);
             this.openMenuItem.Text = "&Open";
             this.openMenuItem.Click += new System.EventHandler(this.openMenuItem_Click);
             // 
             // openFolderToolStripMenuItem
             // 
             this.openFolderToolStripMenuItem.Name = "openFolderToolStripMenuItem";
-            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.openFolderToolStripMenuItem.Text = "Open &Folder";
+            this.openFolderToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.P)));
+            this.openFolderToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.openFolderToolStripMenuItem.Text = "Open &Palette";
             this.openFolderToolStripMenuItem.Click += new System.EventHandler(this.openFolderToolStripMenuItem_Click);
             // 
             // saveMenuItem
@@ -122,15 +132,16 @@ namespace GroupEMosaicator.View
             this.saveMenuItem.Enabled = false;
             this.saveMenuItem.Name = "saveMenuItem";
             this.saveMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveMenuItem.Size = new System.Drawing.Size(183, 22);
             this.saveMenuItem.Text = "&Save";
             this.saveMenuItem.Click += new System.EventHandler(this.saveMenuItem_Click);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitMenuItem.Text = "&Exit";
+            this.exitMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.X)));
+            this.exitMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.exitMenuItem.Text = "E&xit";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 
             // editMenu
@@ -139,7 +150,7 @@ namespace GroupEMosaicator.View
             this.createMosaicMenuItem});
             this.editMenu.Name = "editMenu";
             this.editMenu.Size = new System.Drawing.Size(39, 20);
-            this.editMenu.Text = "Edit";
+            this.editMenu.Text = "&Edit";
             // 
             // createMosaicMenuItem
             // 
@@ -148,14 +159,14 @@ namespace GroupEMosaicator.View
             this.pictureMosaicToolStripMenuItem});
             this.createMosaicMenuItem.Name = "createMosaicMenuItem";
             this.createMosaicMenuItem.Size = new System.Drawing.Size(158, 22);
-            this.createMosaicMenuItem.Text = "Create Mosaic...";
+            this.createMosaicMenuItem.Text = "Create &Mosaic...";
             // 
             // solidBlockMosaicToolStripMenuItem
             // 
             this.solidBlockMosaicToolStripMenuItem.Enabled = false;
             this.solidBlockMosaicToolStripMenuItem.Name = "solidBlockMosaicToolStripMenuItem";
             this.solidBlockMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.solidBlockMosaicToolStripMenuItem.Text = "Solid Block Mosaic";
+            this.solidBlockMosaicToolStripMenuItem.Text = "Solid &Block Mosaic";
             this.solidBlockMosaicToolStripMenuItem.Click += new System.EventHandler(this.solidBlockMosaicToolStripMenuItem_Click);
             // 
             // pictureMosaicToolStripMenuItem
@@ -163,7 +174,7 @@ namespace GroupEMosaicator.View
             this.pictureMosaicToolStripMenuItem.Enabled = false;
             this.pictureMosaicToolStripMenuItem.Name = "pictureMosaicToolStripMenuItem";
             this.pictureMosaicToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
-            this.pictureMosaicToolStripMenuItem.Text = "Picture Mosaic";
+            this.pictureMosaicToolStripMenuItem.Text = "&Picture Mosaic";
             this.pictureMosaicToolStripMenuItem.Click += new System.EventHandler(this.pictureMosaicToolStripMenuItem_Click);
             // 
             // helpMenu
@@ -173,32 +184,27 @@ namespace GroupEMosaicator.View
             this.aboutMenuItem});
             this.helpMenu.Name = "helpMenu";
             this.helpMenu.Size = new System.Drawing.Size(44, 20);
-            this.helpMenu.Text = "Help";
+            this.helpMenu.Text = "&Help";
             // 
             // helpMenuItem
             // 
             this.helpMenuItem.Name = "helpMenuItem";
-            this.helpMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.helpMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.helpMenuItem.Text = "Help";
+            this.helpMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
+            this.helpMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.helpMenuItem.Text = "&Help";
             // 
             // aboutMenuItem
             // 
             this.aboutMenuItem.Name = "aboutMenuItem";
-            this.aboutMenuItem.Size = new System.Drawing.Size(107, 22);
-            this.aboutMenuItem.Text = "About";
-            // 
-            // originalImageBox
-            // 
-            this.originalImageBox.Location = new System.Drawing.Point(0, 0);
-            this.originalImageBox.Name = "originalImageBox";
-            this.originalImageBox.Size = new System.Drawing.Size(775, 488);
-            this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.originalImageBox.TabIndex = 1;
-            this.originalImageBox.TabStop = false;
+            this.aboutMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
+            this.aboutMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.aboutMenuItem.Text = "&About";
             // 
             // tabPane
             // 
+            this.tabPane.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabPane.Controls.Add(this.originalTabPage);
             this.tabPane.Controls.Add(this.mosaicTabPage);
             this.tabPane.Location = new System.Drawing.Point(0, 52);
@@ -209,7 +215,8 @@ namespace GroupEMosaicator.View
             // 
             // originalTabPage
             // 
-            this.originalTabPage.Controls.Add(this.originalImageBox);
+            this.originalTabPage.AutoScroll = true;
+            this.originalTabPage.Controls.Add(this.originalImagePanel);
             this.originalTabPage.Location = new System.Drawing.Point(4, 22);
             this.originalTabPage.Name = "originalTabPage";
             this.originalTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -218,9 +225,32 @@ namespace GroupEMosaicator.View
             this.originalTabPage.Text = "Original Image";
             this.originalTabPage.UseVisualStyleBackColor = true;
             // 
+            // originalImagePanel
+            // 
+            this.originalImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.originalImagePanel.AutoScroll = true;
+            this.originalImagePanel.Controls.Add(this.originalImageBox);
+            this.originalImagePanel.Location = new System.Drawing.Point(3, 3);
+            this.originalImagePanel.Name = "originalImagePanel";
+            this.originalImagePanel.Size = new System.Drawing.Size(765, 482);
+            this.originalImagePanel.TabIndex = 0;
+            // 
+            // originalImageBox
+            // 
+            this.originalImageBox.Location = new System.Drawing.Point(3, 3);
+            this.originalImageBox.Name = "originalImageBox";
+            this.originalImageBox.Size = new System.Drawing.Size(759, 476);
+            this.originalImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.originalImageBox.TabIndex = 2;
+            this.originalImageBox.TabStop = false;
+            this.originalImageBox.MouseEnter += new System.EventHandler(this.originalImageBox_MouseEnter);
+            this.originalImageBox.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.originalImageBox_MouseWheel);
+            // 
             // mosaicTabPage
             // 
-            this.mosaicTabPage.Controls.Add(this.mosaicImageBox);
+            this.mosaicTabPage.Controls.Add(this.mosaicImagePanel);
             this.mosaicTabPage.Location = new System.Drawing.Point(4, 22);
             this.mosaicTabPage.Name = "mosaicTabPage";
             this.mosaicTabPage.Padding = new System.Windows.Forms.Padding(3);
@@ -229,18 +259,32 @@ namespace GroupEMosaicator.View
             this.mosaicTabPage.Text = "Mosaic";
             this.mosaicTabPage.UseVisualStyleBackColor = true;
             // 
+            // mosaicImagePanel
+            // 
+            this.mosaicImagePanel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.mosaicImagePanel.AutoScroll = true;
+            this.mosaicImagePanel.Controls.Add(this.mosaicImageBox);
+            this.mosaicImagePanel.Location = new System.Drawing.Point(3, 3);
+            this.mosaicImagePanel.Name = "mosaicImagePanel";
+            this.mosaicImagePanel.Size = new System.Drawing.Size(765, 482);
+            this.mosaicImagePanel.TabIndex = 0;
+            // 
             // mosaicImageBox
             // 
-            this.mosaicImageBox.Location = new System.Drawing.Point(0, 0);
+            this.mosaicImageBox.Location = new System.Drawing.Point(3, 3);
             this.mosaicImageBox.Name = "mosaicImageBox";
-            this.mosaicImageBox.Size = new System.Drawing.Size(771, 488);
+            this.mosaicImageBox.Size = new System.Drawing.Size(759, 476);
             this.mosaicImageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.mosaicImageBox.TabIndex = 0;
+            this.mosaicImageBox.TabIndex = 1;
             this.mosaicImageBox.TabStop = false;
+            this.mosaicImageBox.MouseEnter += new System.EventHandler(this.mosaicImageBox_MouseEnter);
+            this.mosaicImageBox.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.mosaicImageBox_MouseWheel);
             // 
-            // toolStrip1
+            // toolBar
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolBar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openButton,
             this.toolStripSeparator4,
             this.saveButton,
@@ -251,12 +295,14 @@ namespace GroupEMosaicator.View
             this.toolStripSeparator3,
             this.toolStripSplitButton1,
             this.toolStripSeparator5,
-            this.imagePaletteLabel});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(777, 25);
-            this.toolStrip1.TabIndex = 8;
-            this.toolStrip1.Text = "toolStrip1";
+            this.imagePaletteLabel,
+            this.toolStripSeparator6,
+            this.viewPaletteButton});
+            this.toolBar.Location = new System.Drawing.Point(0, 24);
+            this.toolBar.Name = "toolBar";
+            this.toolBar.Size = new System.Drawing.Size(777, 25);
+            this.toolBar.TabIndex = 8;
+            this.toolBar.Text = "toolStrip1";
             // 
             // openButton
             // 
@@ -265,7 +311,7 @@ namespace GroupEMosaicator.View
             this.openButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.openButton.Name = "openButton";
             this.openButton.Size = new System.Drawing.Size(23, 22);
-            this.openButton.Text = "toolStripButton1";
+            this.openButton.ToolTipText = "Open Image";
             this.openButton.Click += new System.EventHandler(this.openButton_Click);
             // 
             // toolStripSeparator4
@@ -281,7 +327,7 @@ namespace GroupEMosaicator.View
             this.saveButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(23, 22);
-            this.saveButton.Text = "toolStripButton2";
+            this.saveButton.ToolTipText = "Save Image";
             this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
             // 
             // toolStripSeparator2
@@ -301,6 +347,7 @@ namespace GroupEMosaicator.View
             this.toolStripGridButton.Name = "toolStripGridButton";
             this.toolStripGridButton.Size = new System.Drawing.Size(54, 22);
             this.toolStripGridButton.Text = "Grid...";
+            this.toolStripGridButton.ToolTipText = "Display a grid for the current block size.";
             // 
             // addGridToolStripMenuItem
             // 
@@ -345,6 +392,7 @@ namespace GroupEMosaicator.View
             this.blockSizeTextBox.Text = "Enter Block Size";
             this.blockSizeTextBox.Leave += new System.EventHandler(this.blockSizeTextBox_Left);
             this.blockSizeTextBox.Click += new System.EventHandler(this.blockSizeTextBox_Click);
+            this.blockSizeTextBox.TextChanged += new System.EventHandler(this.blockSizeTextBox_TextChanged);
             // 
             // toolStripSeparator3
             // 
@@ -362,6 +410,7 @@ namespace GroupEMosaicator.View
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
             this.toolStripSplitButton1.Size = new System.Drawing.Size(107, 22);
             this.toolStripSplitButton1.Text = "Create Mosaic...";
+            this.toolStripSplitButton1.ToolTipText = "Create a mosaic.";
             // 
             // createBlockMosaicToolStripMenuItem
             // 
@@ -406,12 +455,35 @@ namespace GroupEMosaicator.View
             this.imagePaletteLabel.Size = new System.Drawing.Size(106, 22);
             this.imagePaletteLabel.Text = "0 images in palette";
             // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 25);
+            // 
+            // viewPaletteButton
+            // 
+            this.viewPaletteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.viewPaletteButton.Enabled = false;
+            this.viewPaletteButton.Image = ((System.Drawing.Image)(resources.GetObject("viewPaletteButton.Image")));
+            this.viewPaletteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.viewPaletteButton.Name = "viewPaletteButton";
+            this.viewPaletteButton.Size = new System.Drawing.Size(75, 22);
+            this.viewPaletteButton.Text = "View Palette";
+            this.viewPaletteButton.ToolTipText = "View the images in the palette.";
+            this.viewPaletteButton.Click += new System.EventHandler(this.viewPaletteButton_Click);
+            // 
+            // imagePalette
+            // 
+            this.imagePalette.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
+            this.imagePalette.ImageSize = new System.Drawing.Size(16, 16);
+            this.imagePalette.TransparentColor = System.Drawing.Color.Transparent;
+            // 
             // MosaicForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(777, 565);
-            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.toolBar);
             this.Controls.Add(this.tabPane);
             this.Controls.Add(this.menuBar);
             this.MainMenuStrip = this.menuBar;
@@ -419,13 +491,15 @@ namespace GroupEMosaicator.View
             this.Text = "Mosaic Creator by Walker and Odom";
             this.menuBar.ResumeLayout(false);
             this.menuBar.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).EndInit();
             this.tabPane.ResumeLayout(false);
             this.originalTabPage.ResumeLayout(false);
+            this.originalImagePanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.originalImageBox)).EndInit();
             this.mosaicTabPage.ResumeLayout(false);
+            this.mosaicImagePanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mosaicImageBox)).EndInit();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.toolBar.ResumeLayout(false);
+            this.toolBar.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,15 +516,13 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.ToolStripMenuItem helpMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createMosaicMenuItem;
-        private System.Windows.Forms.PictureBox originalImageBox;
         private System.Windows.Forms.TabControl tabPane;
         private System.Windows.Forms.TabPage originalTabPage;
         private System.Windows.Forms.TabPage mosaicTabPage;
-        private System.Windows.Forms.PictureBox mosaicImageBox;
         private System.Windows.Forms.ToolStripMenuItem saveMenuItem;
         private System.Windows.Forms.ToolStripMenuItem solidBlockMosaicToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem pictureMosaicToolStripMenuItem;
-        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStrip toolBar;
         private System.Windows.Forms.ToolStripSplitButton toolStripGridButton;
         private System.Windows.Forms.ToolStripMenuItem addGridToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem squareGridToolStripMenuItem;
@@ -471,6 +543,13 @@ namespace GroupEMosaicator.View
         private System.Windows.Forms.ToolStripLabel imagePaletteLabel;
         private System.Windows.Forms.ToolStripMenuItem triangleBlocksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem squareBlocksToolStripMenuItem;
+        private System.Windows.Forms.ImageList imagePalette;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton viewPaletteButton;
+        private System.Windows.Forms.Panel originalImagePanel;
+        private System.Windows.Forms.PictureBox originalImageBox;
+        private Panel mosaicImagePanel;
+        private PictureBox mosaicImageBox;
     }
 }
 

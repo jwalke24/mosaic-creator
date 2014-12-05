@@ -14,7 +14,7 @@ namespace GroupEMosaicator.IO
 
         public static Bitmap OpenFile()
         {
-            var openDialog = new OpenFileDialog { Title = @"Open..." };
+            var openDialog = new OpenFileDialog {Title = @"Open..."};
 
             filterFileExtensions(openDialog);
 
@@ -22,8 +22,7 @@ namespace GroupEMosaicator.IO
             {
                 try
                 {
-                    var imageStream = openDialog.OpenFile();
-                    return new Bitmap(imageStream);
+                    return new Bitmap(openDialog.OpenFile());
                 }
                 catch (Exception ex)
                 {
@@ -36,7 +35,7 @@ namespace GroupEMosaicator.IO
 
         public static void SaveFile(Image image)
         {
-            var saveDialog = new SaveFileDialog { Title = @"Save..." };
+            var saveDialog = new SaveFileDialog {Title = @"Save..."};
 
             filterFileExtensions(saveDialog);
 
@@ -44,7 +43,7 @@ namespace GroupEMosaicator.IO
             {
                 try
                 {
-                    var imageStream = saveDialog.OpenFile();
+                    Stream imageStream = saveDialog.OpenFile();
 
                     switch (saveDialog.FilterIndex)
                     {
@@ -83,12 +82,11 @@ namespace GroupEMosaicator.IO
                 {
                     var directory = new DirectoryInfo(folderDialog.SelectedPath);
 
-                    var files = readImageFilesFromDirectory(directory);
+                    IEnumerable<FileInfo> files = readImageFilesFromDirectory(directory);
 
-                    foreach (var fileInfo in files)
+                    foreach (FileInfo fileInfo in files)
                     {
-                        var imageStream = fileInfo.OpenRead();
-                        images.Add(new Bitmap(imageStream));
+                        images.Add(Image.FromStream(fileInfo.Open(FileMode.Open, FileAccess.Read, FileShare.None)));
                     }
                 }
                 catch (IOException ex)
@@ -107,7 +105,7 @@ namespace GroupEMosaicator.IO
 
         private static IEnumerable<FileInfo> readImageFilesFromDirectory(DirectoryInfo directory)
         {
-            string[] extensions = { ".jpg", ".png", ".bmp", ".gif" };
+            string[] extensions = {".jpg", ".png", ".bmp", ".gif"};
 
             return directory.GetFiles()
                 .Where(file => extensions.Contains(file.Extension.ToLower()))

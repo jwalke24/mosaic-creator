@@ -68,9 +68,11 @@ namespace GroupEMosaicator.Model
             int redSum = 0;
             int greenSum = 0;
             int blueSum = 0;
+            int num = 0;
             for (int j = 0; j < area.Height; j++)
             {
-                for (int i = 0; i < area.Width - j; i++)
+                num++;
+                for (int i = 0; i < area.Width - num; i++)
                 {
                     Color color = bitmap.GetPixel(area.X + i, area.Y + j);
                     redSum += color.R;
@@ -106,9 +108,9 @@ namespace GroupEMosaicator.Model
             int greenSum = 0;
             int blueSum = 0;
 
-            for (int j = 0; j < area.Height; j++)
+            for (int j = area.Height; j > 0; j--)
             {
-                for (int i = area.Width - j; i < area.Width; i++)
+                for (int i = area.Width; i > 0 + j; i--)
                 {
                     Color color = bitmap.GetPixel(area.X + i, area.Y + j);
                     redSum += color.R;
@@ -118,18 +120,22 @@ namespace GroupEMosaicator.Model
             }
 
             Color newColor = getNewTriangleColor(area, redSum, greenSum, blueSum);
-
             return newColor;
         }
 
         private static Color getNewTriangleColor(Rectangle area, int redSum, int greenSum, int blueSum)
         {
-            int redValue = (redSum*2/(area.Width*area.Height));
-            int greenValue = (greenSum*2/(area.Width*area.Height));
-            int blueValue = (blueSum*2/(area.Width*area.Height));
+            int redValue = 2*(redSum*checkBoxSize(area)/(area.Width*area.Height));
+            int greenValue = 2*(greenSum*checkBoxSize(area)/(area.Width*area.Height));
+            int blueValue = 2*(blueSum*checkBoxSize(area)/(area.Width*area.Height));
 
             Color newColor = Color.FromArgb(255, redValue, greenValue, blueValue);
             return newColor;
+        }
+
+        private static int checkBoxSize(Rectangle area)
+        {
+            return 1;
         }
 
         private static Color getNewRectangleColor(Rectangle area, int redSum, int greenSum, int blueSum)
